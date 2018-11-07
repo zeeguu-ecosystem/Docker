@@ -1,0 +1,9 @@
+[submodule "Zeeguu-API"]
+	path = Zeeguu-API
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-API
+[submodule "Zeeguu-Web"]
+	path = Zeeguu-Web
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-Web
+[submodule "Zeeguu-Core"]
+	path = Zeeguu-Core
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-Core
