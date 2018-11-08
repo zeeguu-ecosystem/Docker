@@ -10,3 +10,6 @@
 [submodule "Teacher-Dashboard"]
 	path = Teacher-Dashboard
 	url = https://github.com/zeeguu-ecosystem/Teacher-Dashboard
+[submodule "Exercises-Platform"]
+	path = Exercises-Platform
+	url = https://github.com/zeeguu-ecosystem/Exercises-Platform
