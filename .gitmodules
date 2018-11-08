@@ -7,3 +7,6 @@
 [submodule "Zeeguu-Core"]
 	path = Zeeguu-Core
 	url = https://github.com/zeeguu-ecosystem/Zeeguu-Core
+[submodule "Teacher-Dashboard"]
+	path = Teacher-Dashboard
+	url = https://github.com/zeeguu-ecosystem/Teacher-Dashboard
