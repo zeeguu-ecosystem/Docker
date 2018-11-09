@@ -13,3 +13,6 @@
 [submodule "Exercises-Platform"]
 	path = Exercises-Platform
 	url = https://github.com/zeeguu-ecosystem/Exercises-Platform
+[submodule "Unified-Multilanguage-Reader"]
+	path = Unified-Multilanguage-Reader
+	url = https://github.com/zeeguu-ecosystem/Unified-Multilanguage-Reader
