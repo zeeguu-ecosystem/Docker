@@ -1,0 +1,18 @@
+[submodule "Zeeguu-API"]
+	path = Zeeguu-API
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-API
+[submodule "Zeeguu-Web"]
+	path = Zeeguu-Web
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-Web
+[submodule "Zeeguu-Core"]
+	path = Zeeguu-Core
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-Core
+[submodule "Zeeguu-Teacher-Dashboard"]
+	path = Zeeguu-Teacher-Dashboard
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-Teacher-Dashboard
+[submodule "Zeeguu-Exercises"]
+	path = Zeeguu-Exercises
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-Exercises
+[submodule "Zeeguu-Reader"]
+	path = Zeeguu-Reader
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-Reader
