@@ -18,6 +18,12 @@ sudo apt-get install docker.io -y
 ```
 
 #### Building container images
+
+The rest of the commands must be run from the Lineup folder:
+```
+cd Lineup
+```
+
 To build the zeeguu-mysql container image:
 ```sh
 docker build -t zeeguu-mysql -f docker-files/zeeguu-mysql/Dockerfile .
