@@ -2,7 +2,7 @@
 
 To clone this repository run the following:
 ```
-git clone --recursive https://github.com/zeeguu-ecosystem/Docker
+git clone --recursive https://github.com/zeeguu-ecosystem/Lineup
 ```
 
 ## Zeeguu container images
