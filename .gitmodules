@@ -9,10 +9,10 @@
 	url = https://github.com/zeeguu-ecosystem/Zeeguu-Core
 [submodule "Zeeguu-Teacher-Dashboard"]
 	path = Zeeguu-Teacher-Dashboard
-	url = https://github.com/zeeguu-ecosystem/Teacher-Dashboard
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-Teacher-Dashboard
 [submodule "Zeeguu-Exercises"]
 	path = Zeeguu-Exercises
-	url = https://github.com/zeeguu-ecosystem/Exercises-Platform
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-Exercises
 [submodule "Zeeguu-Reader"]
 	path = Zeeguu-Reader
-	url = https://github.com/zeeguu-ecosystem/Unified-Multilanguage-Reader
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-Reader
