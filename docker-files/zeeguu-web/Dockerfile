@@ -51,9 +51,9 @@ WORKDIR /opt/Zeeguu-Teacher-Dashboard/teacher_dashboard
 RUN pip install -r requirements.txt
 RUN python setup.py install
 
-# Install Exercises-Platform
+# Install Zeeguu-Exercises
 COPY --chown=www-data:www-data Zeeguu-Exercises /opt/Zeeguu-Exercises
-WORKDIR /opt/Exercises-Platform
+WORKDIR /opt/Zeeguu-Exercises
 # Update Zeeguu API url
 RUN sed -i "s,$DEFAULT_ZEEGUU_API,$ZEEGUU_API__EXTERNAL,g" src/zeeguu_exercises/static/js/app/settings.js
 RUN sed -i "s,$DEFAULT_ZEEGUU_API,$ZEEGUU_API__INTERNAL,g" src/zeeguu_exercises/endpoints.py
@@ -63,10 +63,10 @@ RUN ./node_modules/.bin/webpack
 RUN npm run build
 # Back-end
 RUN pip install -r requirements.txt
-WORKDIR /opt/Exercises-Platform/src
+WORKDIR /opt/Zeeguu-Exercises/src
 RUN python setup.py install
 
-# Install Unified Multilanguage Reader
+# Install Zeeguu Reader
 COPY --chown=www-data:www-data Zeeguu-Reader /opt/Zeeguu-Reader
 WORKDIR /opt/Zeeguu-Reader
 # Update Zeeguu API url
@@ -77,7 +77,7 @@ RUN npm install
 RUN ./node_modules/.bin/webpack
 # Back-end
 RUN pip install -r requirements.txt
-WORKDIR /opt/Unified-Multilanguage-Reader/src
+WORKDIR /opt/Zeeguu-Reader/src
 RUN python setup.py install
 
 # Copy over the zeeguu_web/static files under /var/www
