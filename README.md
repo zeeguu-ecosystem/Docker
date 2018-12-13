@@ -30,9 +30,9 @@ docker build -t zeeguu-api-core -f docker-files/zeeguu-api-core/Dockerfile .
 
 To build the zeeguu-web container image:
 ```sh
-docker build -t zeeguu-web --build-arg ZEEGUU_API__EXTERNAL="http://35.205.189.191:9001"  -f docker-files/zeeguu-web/Dockerfile .
+docker build -t zeeguu-web --build-arg ZEEGUU_API__EXTERNAL="http://1.1.1.1:9001"  -f docker-files/zeeguu-web/Dockerfile .
 ```
-Make sure to replace ``external_api_url`` with the url where your API can be reached from other clients.
+Make sure to replace ``1.1.1.1:9001`` with the url:port where your API can be reached from other clients.
 
 To run the containers:
 ```sh
