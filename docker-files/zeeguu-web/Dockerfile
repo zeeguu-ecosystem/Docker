@@ -46,13 +46,13 @@ RUN pip install -r requirements.txt
 RUN python setup.py install
 
 # Install Teacher-Dashboard
-COPY --chown=www-data:www-data Teacher-Dashboard /opt/Teacher-Dashboard
-WORKDIR /opt/Teacher-Dashboard/teacher_dashboard
+COPY --chown=www-data:www-data Zeeguu-Teacher-Dashboard /opt/Zeeguu-Teacher-Dashboard
+WORKDIR /opt/Zeeguu-Teacher-Dashboard/teacher_dashboard
 RUN pip install -r requirements.txt
 RUN python setup.py install
 
 # Install Exercises-Platform
-COPY --chown=www-data:www-data Exercises-Platform /opt/Exercises-Platform
+COPY --chown=www-data:www-data Zeeguu-Exercises /opt/Zeeguu-Exercises
 WORKDIR /opt/Exercises-Platform
 # Update Zeeguu API url
 RUN sed -i "s,$DEFAULT_ZEEGUU_API,$ZEEGUU_API__EXTERNAL,g" src/zeeguu_exercises/static/js/app/settings.js
@@ -67,8 +67,8 @@ WORKDIR /opt/Exercises-Platform/src
 RUN python setup.py install
 
 # Install Unified Multilanguage Reader
-COPY --chown=www-data:www-data Unified-Multilanguage-Reader /opt/Unified-Multilanguage-Reader
-WORKDIR /opt/Unified-Multilanguage-Reader
+COPY --chown=www-data:www-data Zeeguu-Reader /opt/Zeeguu-Reader
+WORKDIR /opt/Zeeguu-Reader
 # Update Zeeguu API url
 RUN sed -i "s,$DEFAULT_ZEEGUU_API,$ZEEGUU_API__EXTERNAL,g" src/umr/static/scripts/app/zeeguuRequests.js
 RUN sed -i "s,$DEFAULT_ZEEGUU_API,$ZEEGUU_API__INTERNAL,g" src/umr/login.py
@@ -101,7 +101,7 @@ ENV ZEEGUU_CORE_LOG_DIR=/tmp/zeeguu-core-logs
 # Zeeguu-Web
 ENV ZEEGUU_WEB_CONFIG=/opt/Zeeguu-Web/default_web.cfg
 # Teacher-Dashboard
-ENV TEACHER_DASHBOARD_CONFIG=/opt/Teacher-Dashboard/teacher_dashboard/default.cfg
+ENV TEACHER_DASHBOARD_CONFIG=/opt/Zeeguu-Teacher-Dashboard/teacher_dashboard/default.cfg
 ENV ZEEGUU_API=$ZEEGUU_API
 
 RUN a2enmod rewrite
