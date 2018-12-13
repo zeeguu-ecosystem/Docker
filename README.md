@@ -58,14 +58,14 @@ docker run --net=host -d --name=zeeguu-web zeeguu-web
 
 ### Extra environment variables for containers
 
-For ``zeeguu-api-core``:
+For ``zeeguu-api-core`` you need to define the following API keys:
 - GOOGLE_TRANSLATE_API_KEY
 - MICROSOFT_TRANSLATE_API_KEY
 - WORDNIK_API_KEY
 
 To pass the variable, add the ``-e`` flag to docker run command. Example:
 ```sh
-docker run --net=host -d -e WORDNIK_API_KEY="test_key" --name=zeeguu-api-core zeeguu-api-core
+docker run --net=host -d -e MICROSOFT_TRANSLATE_API_KEY='key' -e GOOGLE_TRANSLATE_API_KEY='key' -e WORDNIK_API_KEY='key'  --name=zeeguu-api-core zeeguu-api-core
 ```
 
 ### Adding articles for the reader
