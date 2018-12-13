@@ -7,12 +7,12 @@
 [submodule "Zeeguu-Core"]
 	path = Zeeguu-Core
 	url = https://github.com/zeeguu-ecosystem/Zeeguu-Core
-[submodule "Teacher-Dashboard"]
-	path = Teacher-Dashboard
+[submodule "Zeeguu-Teacher-Dashboard"]
+	path = Zeeguu-Teacher-Dashboard
 	url = https://github.com/zeeguu-ecosystem/Teacher-Dashboard
-[submodule "Exercises-Platform"]
-	path = Exercises-Platform
+[submodule "Zeeguu-Exercises"]
+	path = Zeeguu-Exercises
 	url = https://github.com/zeeguu-ecosystem/Exercises-Platform
-[submodule "Unified-Multilanguage-Reader"]
-	path = Unified-Multilanguage-Reader
+[submodule "Zeeguu-Reader"]
+	path = Zeeguu-Reader
 	url = https://github.com/zeeguu-ecosystem/Unified-Multilanguage-Reader
