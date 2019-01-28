@@ -8,7 +8,7 @@ ARG DEFAULT_ZEEGUU_API="https://zeeguu.unibe.ch/api"
 # ZEEGUU_API__EXTERNAL is accessed from the static JS client code.
 ARG ZEEGUU_API__EXTERNAL=http://127.0.0.1:9001
 # ZEEGUU_API__INTERNAL is accessed from the python code.
-ARG ZEEGUU_API__INTERNAL=http://127.0.0.1:9001
+ARG ZEEGUU_API__INTERNAL=http://172.17.0.3:9001
 
 # The ZEEGUU_API__EXTERNAL should be reachable from the client side while
 # ZEEGUU_API__INTERNAL has to be reachable from the server side.
