@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+# WARNING: Make sure that once you've added API keys to this file, you don't commit it anymore. To do this you can run:
+
+#   git update-index --assume-unchanged rebuild_api_core.sh
+
 MICROSOFT_TRANSLATE_API_KEY=''
 GOOGLE_TRANSLATE_API_KEY=''
 WORDNIK_API_KEY=''
