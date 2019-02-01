@@ -5,6 +5,10 @@ set -e
 
 #   git update-index --assume-unchanged rebuild_api_core.sh
 
+# later, if you want to work again with the file, you can undo this
+
+#   git git update-index --no-assume-unchanged rebuild_api_core.sh
+
 MICROSOFT_TRANSLATE_API_KEY=''
 GOOGLE_TRANSLATE_API_KEY=''
 WORDNIK_API_KEY=''
