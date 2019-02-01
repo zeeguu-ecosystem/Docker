@@ -6,15 +6,15 @@ SERVER_IP=$(ifconfig $DEFAULT_INTERFACE | grep "inet " | awk '{print $2}')
 
 # Set this to your server public IP if you have a different public IP than the one
 # from the interface.
-#SERVER_IP="1.1.1.1"
+SERVER_IP="zeeguu.org"
 
 ZEEGUU_API__EXTERNAL="http://$SERVER_IP:9001"
 
-docker build -t zeeguu-web-test \
+docker build -t zeeguu-web-dev \
     --build-arg ZEEGUU_API__EXTERNAL="$ZEEGUU_API__EXTERNAL" \
-    -f docker-files-test/zeeguu-web/Dockerfile .
+    -f docker-files-dev/zeeguu-web/Dockerfile .
 set +e
-docker rm -f zeeguu-web-test
+docker rm -f zeeguu-web-dev
 set -e
-docker run --net=host -d --name=zeeguu-web-test zeeguu-web-test
-docker logs zeeguu-web-test --follow
+docker run --net=host -v /home/mlun/Lineup/news-icons:/var/www/static -d --name=zeeguu-web-dev zeeguu-web-dev
+docker logs zeeguu-web-dev --follow
