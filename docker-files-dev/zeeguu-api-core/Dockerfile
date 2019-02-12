@@ -12,4 +12,5 @@ RUN python setup.py install
 
 WORKDIR /opt/Zeeguu-API
 
+# Running the API in debug mode
 CMD ["python", "zeeguu_api"]
