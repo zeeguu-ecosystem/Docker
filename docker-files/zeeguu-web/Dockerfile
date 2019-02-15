@@ -8,7 +8,7 @@ ARG DEFAULT_ZEEGUU_API="https://zeeguu.unibe.ch/api"
 # ZEEGUU_API__EXTERNAL is accessed from the static JS client code.
 ARG ZEEGUU_API__EXTERNAL=http://127.0.0.1:9001
 # ZEEGUU_API__INTERNAL is accessed from the python code.
-ARG ZEEGUU_API__INTERNAL=http://127.0.0.1:9001
+ARG ZEEGUU_API__INTERNAL=http://127.0.0.1:8080
 
 # The ZEEGUU_API__EXTERNAL should be reachable from the client side while
 # ZEEGUU_API__INTERNAL has to be reachable from the server side.
@@ -31,10 +31,6 @@ RUN pip install mod_wsgi
 RUN /bin/bash -c 'mod_wsgi-express install-module | tee /etc/apache2/mods-available/wsgi.{load,conf}'
 RUN a2enmod wsgi
 RUN a2enmod headers
-
-# Enable Zeeguu-Web website
-COPY ./docker-files/zeeguu-web/apache-zeeguu.conf /etc/apache2/sites-available/apache-zeeguu.conf
-RUN a2ensite apache-zeeguu
 
 # All folders exposed via apache need to be owned by www-data since
 # that is the user apache will run under.
@@ -87,9 +83,14 @@ RUN cp -r /opt/Zeeguu-Web /var/www/zeeguu-web
 RUN chown www-data /var/www
 RUN chgrp www-data /var/www
 
+# Enable Zeeguu-Web website
+COPY ./docker-files/zeeguu-web/apache-zeeguu.conf /etc/apache2/sites-available/apache-zeeguu.conf
 # Disable default website and enable zeeguu
 RUN a2dissite 000-default.conf
 RUN a2ensite apache-zeeguu.conf
+
+RUN sed -i "s,http://127.0.0.1:8080,$ZEEGUU_API__INTERNAL,g" /etc/apache2/sites-available/apache-zeeguu.conf
+RUN sed -i "s,http://127.0.0.1:9001,$ZEEGUU_API__INTERNAL/api,g" /opt/Zeeguu-Web/default_web.cfg
 
 # mod_wsgi will not be able to import python packages without this
 ENV PYTHONPATH=/usr/local/lib/python3.6/site-packages
@@ -105,5 +106,7 @@ ENV TEACHER_DASHBOARD_CONFIG=/opt/Zeeguu-Teacher-Dashboard/src/default.cfg
 ENV ZEEGUU_API=$ZEEGUU_API
 
 RUN a2enmod rewrite
+RUN a2enmod proxy
+RUN a2enmod proxy_http
 
 CMD  /usr/sbin/apache2ctl -D FOREGROUND
