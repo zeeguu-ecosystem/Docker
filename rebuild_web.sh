@@ -18,6 +18,5 @@ set +e
 docker rm -f zeeguu-web-dev
 set -e
 
-# 
-docker run --net=host -v ./Zeeguu-Reader/src/umr/static/news-icons:/var/www/static -d --name=zeeguu-web-dev zeeguu-web-dev
+docker run --net=host -v `pwd`/Zeeguu-Reader/src/umr/static/images/news-icons:/var/www/static -d --name=zeeguu-web-dev zeeguu-web-dev
 docker logs zeeguu-web-dev --follow
