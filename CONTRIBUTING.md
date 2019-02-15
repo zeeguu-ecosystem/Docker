@@ -57,6 +57,11 @@ launch the docker container. You need to run the script after every change you a
 doing to the code in either Zeeguu-Core or Zeeguu-API. Be sure to update the script
 with valid API keys that you are using for testing.
 
+*WARNING*: Make sure that once you've added API keys to this file, you don't commit it
+anymore. To do this you can run: 
+
+      git update-index --assume-unchanged rebuild_api_core.sh
+
 *NOTE*: If you are planning to change the dependencies for the project, it is required
 to rebuild the base container image prior to running the rebuild script.
 
