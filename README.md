@@ -68,6 +68,17 @@ To pass the variable, add the ``-e`` flag to docker run command. Example:
 docker run --net=host -d -e MICROSOFT_TRANSLATE_API_KEY='key' -e GOOGLE_TRANSLATE_API_KEY='key' -e WORDNIK_API_KEY='key'  --name=zeeguu-api-core zeeguu-api-core
 ```
 
+### Storing MySQL data under a given directory on the system
+
+To store the MySQL data under a given path, follow the steps:
+
+1. Create the data directory on the host system (e.g. ``/opt/mysql_datadir``)
+
+2. Add the ``-v`` option to the MySQL container:
+```sh
+docker run --net=host -v /opt/mysql_datadir:/var/lib/mysql -d --name=zeeguu-mysql zeeguu-mysql
+```
+
 ### Adding articles for the reader
 
 To add a new RSS feed for the reader, you have to run the following:

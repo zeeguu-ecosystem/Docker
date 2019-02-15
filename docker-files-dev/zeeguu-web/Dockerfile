@@ -21,7 +21,7 @@ RUN python setup.py install
 
 # Install Teacher-Dashboard
 COPY --chown=www-data:www-data Zeeguu-Teacher-Dashboard /opt/Zeeguu-Teacher-Dashboard
-WORKDIR /opt/Zeeguu-Teacher-Dashboard/teacher_dashboard
+WORKDIR /opt/Zeeguu-Teacher-Dashboard/src
 RUN python setup.py install
 
 # Install Zeeguu-Exercises
@@ -72,7 +72,7 @@ ENV ZEEGUU_CORE_LOG_DIR=/tmp/zeeguu-core-logs
 # Zeeguu-Web
 ENV ZEEGUU_WEB_CONFIG=/opt/Zeeguu-Web/default_web.cfg
 # Teacher-Dashboard
-ENV TEACHER_DASHBOARD_CONFIG=/opt/Zeeguu-Teacher-Dashboard/teacher_dashboard/default.cfg
+ENV TEACHER_DASHBOARD_CONFIG=/opt/Zeeguu-Teacher-Dashboard/src/default.cfg
 ENV ZEEGUU_API=$ZEEGUU_API
 
 RUN a2enmod rewrite

@@ -8,7 +8,7 @@ ARG DEFAULT_ZEEGUU_API="https://zeeguu.unibe.ch/api"
 # ZEEGUU_API__EXTERNAL is accessed from the static JS client code.
 ARG ZEEGUU_API__EXTERNAL=http://127.0.0.1:9001
 # ZEEGUU_API__INTERNAL is accessed from the python code.
-ARG ZEEGUU_API__INTERNAL=http://172.17.0.3:9001
+ARG ZEEGUU_API__INTERNAL=http://127.0.0.1:9001
 
 # The ZEEGUU_API__EXTERNAL should be reachable from the client side while
 # ZEEGUU_API__INTERNAL has to be reachable from the server side.
@@ -47,7 +47,7 @@ RUN python setup.py install
 
 # Install Teacher-Dashboard
 COPY --chown=www-data:www-data Zeeguu-Teacher-Dashboard /opt/Zeeguu-Teacher-Dashboard
-WORKDIR /opt/Zeeguu-Teacher-Dashboard/teacher_dashboard
+WORKDIR /opt/Zeeguu-Teacher-Dashboard/src
 RUN pip install -r requirements.txt
 RUN python setup.py install
 
@@ -101,7 +101,7 @@ ENV ZEEGUU_CORE_LOG_DIR=/tmp/zeeguu-core-logs
 # Zeeguu-Web
 ENV ZEEGUU_WEB_CONFIG=/opt/Zeeguu-Web/default_web.cfg
 # Teacher-Dashboard
-ENV TEACHER_DASHBOARD_CONFIG=/opt/Zeeguu-Teacher-Dashboard/teacher_dashboard/default.cfg
+ENV TEACHER_DASHBOARD_CONFIG=/opt/Zeeguu-Teacher-Dashboard/src/default.cfg
 ENV ZEEGUU_API=$ZEEGUU_API
 
 RUN a2enmod rewrite
