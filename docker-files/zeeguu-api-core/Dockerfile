@@ -32,6 +32,10 @@ RUN python setup.py install
 ENV ZEEGUU_CORE_CONFIG=/opt/Zeeguu-Core/default_core.cfg
 ENV ZEEGUU_API_CONFIG=/opt/Zeeguu-API/default_api.cfg
 ENV ZEEGUU_CORE_LOG_DIR=/tmp/zeeguu-core-logs
+
+# set this if you want to use the FMD...
+#ENV FLASK_MONITORING_DASHBOARD_CONFIG=/opt/fmd/dashboard.cfg
+
 # TODO: Check if this is still required
 # RUN python -m zeeguu.populate
 
