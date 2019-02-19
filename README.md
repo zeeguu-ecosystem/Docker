@@ -34,11 +34,10 @@ To build the zeeguu-api-core container image:
 docker build -t zeeguu-api-core -f docker-files/zeeguu-api-core/Dockerfile .
 ```
 
-To build the zeeguu-web container image:
+To build the zeeguu-web container image (Make sure to replace 1.1.1.1:9001 with the url:port where your API can be reached from other clients.):
 ```sh
 docker build -t zeeguu-web --build-arg ZEEGUU_API__EXTERNAL="http://1.1.1.1:9001"  -f docker-files/zeeguu-web/Dockerfile .
 ```
-Make sure to replace ``1.1.1.1:9001`` with the url:port where your API can be reached from other clients.
 
 To run the containers:
 ```sh
@@ -81,10 +80,11 @@ docker run --net=host -v /opt/mysql_datadir:/var/lib/mysql -d --name=zeeguu-mysq
 
 ### Adding articles for the reader
 
-To add a new RSS feed for the reader, you have to run the following:
+To add a new RSS feed for the reader, you have to run the following and follow the prompts:
 ```sh
 docker exec -i zeeguu-api-core python /opt/Zeeguu-API/tools/add_rssfeed.py
 ```
+
 Example:
 ```sh
 $ docker exec -i zeeguu-api-core python /opt/Zeeguu-API/tools/add_rssfeed.py
@@ -113,3 +113,11 @@ To fetch the articles from the RSS feed, run the following:
 ```sh
 docker exec -i zeeguu-api-core python /opt/Zeeguu-Core/tools/feed_retrieval.py
 ```
+
+#### RSS feed examples: 
+* Spanish, El Pais: http://ep00.epimg.net/rss/cultura/portada.xml   
+* German, Zeit: http://newsfeed.zeit.de/sport/index   
+* French, Le Monde: https://www.lemonde.fr/musiques/rss_full.xml   
+* Dutch, Algemeen Dagblad: https://www.ad.nl/politiek/rss.xml   
+* English, CNN: http://rss.cnn.com/rss/edition_travel.rss   
+* Italian, Il Tempo: https://www.iltempo.it/rss.jsp?sezione=203 
