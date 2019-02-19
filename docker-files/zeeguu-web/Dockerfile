@@ -31,6 +31,7 @@ RUN pip install mod_wsgi
 RUN /bin/bash -c 'mod_wsgi-express install-module | tee /etc/apache2/mods-available/wsgi.{load,conf}'
 RUN a2enmod wsgi
 RUN a2enmod headers
+RUN a2enmod ssl 
 
 # All folders exposed via apache need to be owned by www-data since
 # that is the user apache will run under.
