@@ -17,7 +17,7 @@ sudo apt-get install docker.io -y
 
 ### Building automatically
 
-Edit the [config_vars.sh](config_vars.sh) file and add the API keys for the third party services.
+Set the environment variables (that can be found at the top of [config_vars.sh](config_vars.sh)) with the API keys for the third party services.
 
 Run the script ``setup_all.sh`` and wait for it to complete.
 
