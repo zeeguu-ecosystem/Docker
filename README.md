@@ -34,6 +34,9 @@ To build the zeeguu-api-core container image:
 docker build -t zeeguu-api-core -f docker-files/zeeguu-api-core/Dockerfile .
 ```
 
+Before building the zeeguu-web container image you must copy the apache-zeeguu.conf.default to apache-zeeguu.conf
+and modify it accordingly.
+
 To build the zeeguu-web container image:
 ```sh
 docker build -t zeeguu-web --build-arg ZEEGUU_API__EXTERNAL="http://1.1.1.1:9001"  -f docker-files/zeeguu-web/Dockerfile .
