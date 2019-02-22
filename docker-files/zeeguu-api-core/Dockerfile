@@ -24,8 +24,15 @@ RUN python setup.py install
 # https://github.com/zeeguu-ecosystem/Python-Wordstats/blob/master/wordstats/config.py#L1
 # under /opt/Zeeguu-API/wordinfo.db
 COPY --chown=www-data:www-data Zeeguu-API /opt/Zeeguu-API
+RUN rm -rf /opt/Zeeguu-API/.git
+COPY --chown=www-data:www-data .git/modules/Zeeguu-API /opt/Zeeguu-API/.git
+RUN cp -R /root/ntlk_data /var/www/nltk_data
 WORKDIR /opt/Zeeguu-API
 RUN pip install -r requirements.txt
+
+# ML: this is here because it still can't be added to the requiremens... a bug prevents
+# the API tests from running when the FMD is deployed
+RUN pip install flask_monitoringdashboard
 RUN python setup.py install
 
 # Set default path to config
