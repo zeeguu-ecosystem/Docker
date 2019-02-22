@@ -26,9 +26,12 @@ RUN python setup.py install
 COPY --chown=www-data:www-data Zeeguu-API /opt/Zeeguu-API
 RUN rm -rf /opt/Zeeguu-API/.git
 COPY --chown=www-data:www-data .git/modules/Zeeguu-API /opt/Zeeguu-API/.git
-RUN cp -R /root/ntlk_data /var/www/nltk_data
 WORKDIR /opt/Zeeguu-API
 RUN pip install -r requirements.txt
+
+#ML: This is needed because the translators installer installs nltk in ~ (which in the
+# case of docker is /root. however, when run, it runs as www-data with ~ being /var/www 
+RUN python -m nltk.downloader -d /var/www/nltk_data punkt
 
 # ML: this is here because it still can't be added to the requiremens... a bug prevents
 # the API tests from running when the FMD is deployed
@@ -41,7 +44,7 @@ ENV ZEEGUU_API_CONFIG=/opt/Zeeguu-API/default_api.cfg
 ENV ZEEGUU_CORE_LOG_DIR=/tmp/zeeguu-core-logs
 
 # set this if you want to use the FMD...
-#ENV FLASK_MONITORING_DASHBOARD_CONFIG=/opt/fmd/dashboard.cfg
+ENV FLASK_MONITORING_DASHBOARD_CONFIG=/opt/fmd/dashboard.cfg
 
 # TODO: Check if this is still required
 # RUN python -m zeeguu.populate
