@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# API keys
-export MICROSOFT_TRANSLATE_API_KEY=''
-export GOOGLE_TRANSLATE_API_KEY=''
-export WORDNIK_API_KEY=''
+# API keys should be in the environment; otherwise, you can also set them here...
+# export MICROSOFT_TRANSLATE_API_KEY=''
+# export GOOGLE_TRANSLATE_API_KEY=''
+# export WORDNIK_API_KEY=''
 
 # Set to YES if running in the cloud
 RUNNING_IN_CLOUD='NO'
