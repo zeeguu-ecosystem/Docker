@@ -26,6 +26,7 @@
         Require all granted
     </Directory>
 
+    # Teacher Dashboard
     ###########
     WSGIDaemonProcess teacher_dash python-path=/opt/Zeeguu-Teacher-Dashboard/teacher_dashboard/teacher_dashboard/
     WSGIScriptAlias /teacher /opt/Zeeguu-Teacher-Dashboard/teacher_dashboard/teacherdash.wsgi
