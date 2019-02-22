@@ -31,6 +31,7 @@ RUN pip install mod_wsgi
 RUN /bin/bash -c 'mod_wsgi-express install-module | tee /etc/apache2/mods-available/wsgi.{load,conf}'
 RUN a2enmod wsgi
 RUN a2enmod headers
+RUN a2enmod ssl 
 
 # All folders exposed via apache need to be owned by www-data since
 # that is the user apache will run under.
@@ -90,7 +91,7 @@ RUN a2dissite 000-default.conf
 RUN a2ensite apache-zeeguu.conf
 
 RUN sed -i "s,http://127.0.0.1:8080,$ZEEGUU_API__INTERNAL,g" /etc/apache2/sites-available/apache-zeeguu.conf
-RUN sed -i "s,http://127.0.0.1:9001,$ZEEGUU_API__INTERNAL/api,g" /opt/Zeeguu-Web/default_web.cfg
+RUN sed -i "s,http://127.0.0.1:9001,$ZEEGUU_API__INTERNAL/,g" /opt/Zeeguu-Web/default_web.cfg
 
 # mod_wsgi will not be able to import python packages without this
 ENV PYTHONPATH=/usr/local/lib/python3.6/site-packages

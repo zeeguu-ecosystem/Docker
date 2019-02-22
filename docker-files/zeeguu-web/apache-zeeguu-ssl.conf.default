@@ -1,0 +1,99 @@
+# -*- apache -*-
+
+RewriteEngine On
+
+# Rewrite everything to https
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+
+<VirtualHost *:443>
+
+    ServerName api.zeeguu.local
+
+    ProxyPreserveHost On
+
+    <Proxy *>
+        Order allow,deny
+        Allow from all
+    </Proxy>
+    ProxyPass / http://localhost:8080/
+    ProxyPassReverse / http://localhost:8080/
+
+    SSLEngine on
+    SSLCertificateFile /etc/letsencrypt/live/zeeguu.local/cert.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/zeeguu.local/privkey.pem
+    SSLCertificateChainFile /etc/letsencrypt/live/zeeguu.local/fullchain.pem
+</VirtualHost>
+
+
+
+<VirtualHost *:443>
+
+    ServerName zeeguu.local
+    Redirect permanent / https://www.zeeguu.local/
+
+</VirtualHost>
+
+
+<VirtualHost *:443>
+
+    ServerName www.zeeguu.local
+
+    Alias /message/ /opt/Zeeguu-Web/zeeguu_web/static/html/
+    <Directory /opt/Zeeguu-Web/zeeguu_web/static/html>
+        Require all granted
+    </Directory>
+
+    ###########
+    WSGIDaemonProcess teacher_dash python-path=/opt/Zeeguu-Teacher-Dashboard/teacher_dashboard/teacher_dashboard/
+    WSGIScriptAlias /teacher /opt/Zeeguu-Teacher-Dashboard/teacher_dashboard/teacherdash.wsgi
+    <Location /teacher>
+        WSGIProcessGroup teacher_dash
+    </Location>
+
+    # WEB 
+    # ################
+    WSGIDaemonProcess zeeguu_web python-path=/opt/Zeeguu-Web/
+    WSGIScriptAlias / /opt/Zeeguu-Web/zeeguu_web.wsgi
+    <Location />
+        WSGIProcessGroup zeeguu_web
+    </Location>
+
+    <Directory "/opt/Zeeguu-Web">
+        <Files "zeeguu_web.wsgi">
+            Require all granted
+        </Files>
+    </Directory>
+
+    <Directory "/opt/Zeeguu-Teacher-Dashboard/teacher_dashboard">
+        <Files "teacherdash.wsgi">
+            Require all granted
+        </Files>
+    </Directory>
+
+    <Directory /var/www/zeeguu-web/zeeguu_web/app/>
+        Header set Access-Control-Allow-Origin "*"
+        WSGIProcessGroup zeeguu_web
+        WSGIApplicationGroup %{GLOBAL}
+        Options +ExecCGI
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+    Alias /static /var/www/zeeguu-web/zeeguu_web/static
+
+    <Directory /var/www/zeeguu-web/zeeguu_web/static/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    LogLevel info
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    SSLEngine on
+    SSLCertificateFile /etc/letsencrypt/live/zeeguu.local/cert.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/zeeguu.local/privkey.pem
+    SSLCertificateChainFile /etc/letsencrypt/live/zeeguu.local/fullchain.pem
+
+</VirtualHost>
