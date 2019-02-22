@@ -9,15 +9,19 @@ git clone --recursive https://github.com/zeeguu-ecosystem/Lineup
 
 Prebuilt images for testing are already available on [dockerhub](https://hub.docker.com/u/zeeguu).
 
-### Building manually
-
-#### Dependencies:
+### Dependencies:
 Docker needs to be installed. Install it with:
 ```sh
 sudo apt-get install docker.io -y
 ```
 
-#### Building container images
+### Building automatically
+
+Set the environment variables (that can be found at the top of [config_vars.sh](config_vars.sh)) with the API keys for the third party services.
+
+Run the script ``setup_all.sh`` and wait for it to complete.
+
+### Building manually
 
 The rest of the commands must be run from the Lineup folder:
 ```
