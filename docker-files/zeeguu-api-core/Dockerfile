@@ -1,5 +1,6 @@
 FROM python:3.6
 
+
 # Install apache2
 RUN apt-get update
 RUN apt-get install -y \
@@ -25,7 +26,6 @@ RUN python setup.py install
 # under /opt/Zeeguu-API/wordinfo.db
 COPY --chown=www-data:www-data Zeeguu-API /opt/Zeeguu-API
 RUN rm -rf /opt/Zeeguu-API/.git
-COPY --chown=www-data:www-data .git/modules/Zeeguu-API /opt/Zeeguu-API/.git
 WORKDIR /opt/Zeeguu-API
 RUN pip install -r requirements.txt
 
@@ -33,18 +33,29 @@ RUN pip install -r requirements.txt
 # case of docker is /root. however, when run, it runs as www-data with ~ being /var/www 
 RUN python -m nltk.downloader -d /var/www/nltk_data punkt
 
-# ML: this is here because it still can't be added to the requiremens... a bug prevents
-# the API tests from running when the FMD is deployed
+
+# comment the following lines if you do not want the FMD deployed
+# if you want it, make sure to have the config/fmd.cfg file in place 
+# pip install is here because fmd still can't be added to the 
+# requiremens... a bug prevents the API tests from running when the FMD is deployed
+
 RUN pip install flask_monitoringdashboard
-RUN python setup.py install
+
+ENV FLASK_MONITORING_DASHBOARD_CONFIG=/opt/zeeguu/config/fmd.cfg
+COPY --chown=www-data:www-data config/fmd.cfg /opt/zeeguu/config/fmd.cfg
+RUN sed -i "s,APP_VERSION.*,APP_VERSION=$API_HASH,g" /opt/zeeguu/config/fmd.cfg 
+# ensure to only have the APP_VERSION and not the GIT config which supersedes it
+RUN sed -i "s,GIT.*,,g" /opt/zeeguu/config/fmd.cfg 
+
 
 # Set default path to config
 ENV ZEEGUU_CORE_CONFIG=/opt/Zeeguu-Core/default_core.cfg
 ENV ZEEGUU_API_CONFIG=/opt/Zeeguu-API/default_api.cfg
 ENV ZEEGUU_CORE_LOG_DIR=/tmp/zeeguu-core-logs
 
-# set this if you want to use the FMD...
-ENV FLASK_MONITORING_DASHBOARD_CONFIG=/opt/fmd/dashboard.cfg
+
+
+
 
 # TODO: Check if this is still required
 # RUN python -m zeeguu.populate
