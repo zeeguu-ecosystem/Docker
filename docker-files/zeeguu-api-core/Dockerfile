@@ -43,7 +43,9 @@ RUN pip install flask_monitoringdashboard
 
 ENV FLASK_MONITORING_DASHBOARD_CONFIG=/opt/zeeguu/config/fmd.cfg
 COPY --chown=www-data:www-data config/fmd.cfg /opt/zeeguu/config/fmd.cfg
-RUN sed -i "s,APP_VERSION.*,APP_VERSION=$API_HASH,g" /opt/zeeguu/config/fmd.cfg 
+ARG API_VERSION
+RUN test -n "$API_VERSION" || (echo "API_VERSION not set use --build-arg... " && false)
+RUN sed -i "s,APP_VERSION.*,APP_VERSION=$API_VERSION,g" /opt/zeeguu/config/fmd.cfg 
 # ensure to only have the APP_VERSION and not the GIT config which supersedes it
 RUN sed -i "s,GIT.*,,g" /opt/zeeguu/config/fmd.cfg 
 
