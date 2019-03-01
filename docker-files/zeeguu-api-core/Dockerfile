@@ -38,17 +38,17 @@ RUN python setup.py install
 RUN python -m nltk.downloader -d /var/www/nltk_data punkt
 
 
-# Installing Flask Monitoring Dashboard (FMD)
-# ===========================================
-# uncomment the lines in this section if you want the FMD deployed
-#     also make sure to have the config/fmd.cfg file in place 
-
-# NOTE(mircealungu) pip install is here because fmd still can't be added to the 
-#     requiremens... a bug prevents the API tests from running when the FMD is deployed
-#     TODO: make sure to move the flask_monitoring_dashboard to requirements and remove
-#     this line once the tests problem is fixed
+## Installing Flask Monitoring Dashboard (FMD)
+## ===========================================
+## uncomment the lines in this section if you want the FMD deployed
+##     also make sure to have the config/fmd.cfg file in place 
 
 #RUN pip install flask_monitoringdashboard
+
+## NOTE(mircealungu) previous pip install is here because fmd still can't be added to the 
+##     requiremens... a bug prevents the API tests from running when the FMD is deployed
+##     TODO: make sure to move the flask_monitoring_dashboard to requirements and remove
+##     this line once the tests problem is fixed
 
 #ENV FLASK_MONITORING_DASHBOARD_CONFIG=/opt/zeeguu/config/fmd.cfg
 #COPY --chown=www-data:www-data config/fmd.cfg /opt/zeeguu/config/fmd.cfg
