@@ -1,6 +1,6 @@
 FROM python:3.6
 
-# Uncomment the following two lines if you want to deploy the Flask Monitoring Dashboard
+# To deploy the Flask Monitoring Dashboard uncomment the following two lines (and the corresponding section below)
 #ARG API_VERSION
 #RUN test -n "$API_VERSION" || (echo "API_VERSION not set use --build-arg... " && false)
 
