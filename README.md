@@ -39,7 +39,7 @@ docker build -t zeeguu-api-core -f docker-files/zeeguu-api-core/Dockerfile .
 ```
 
 *Note:* To deploy the Flask-MonitoringDashboard with the API
-uncomment the corresponding lines [docker-files/zeeguu-core-api/Dockerfile](docker-files/zeeguu-core-api/Dockerfile)
+uncomment the corresponding lines [docker-files/zeeguu-api-core/Dockerfile](docker-files/zeeguu-api-core/Dockerfile)
 . Then make sure to pass the API_VERSION as a --build-arg. 
 Something like: 
 ```sh
