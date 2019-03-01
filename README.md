@@ -38,6 +38,15 @@ To build the zeeguu-api-core container image:
 docker build -t zeeguu-api-core -f docker-files/zeeguu-api-core/Dockerfile .
 ```
 
+*Note:* To deploy the Flask-MonitoringDashboard with the API
+uncomment the corresponding lines [docker-files/zeeguu-core-api/Dockerfile](docker-files/zeeguu-core-api/Dockerfile)
+. Then make sure to pass the API_VERSION as a --build-arg. 
+Something like: 
+```sh
+docker build --build-arg API_VERSION=`cat .git/modules/Zeeguu-API/HEAD` -t zeeguu-api-core -f docker-files/zeeguu-api-core/Dockerfile .
+```
+
+
 To build the zeeguu-web container image (Make sure to replace 1.1.1.1:9001 with the url:port where your API can be reached from other clients.):
 Before building the zeeguu-web container image you must copy the [apache-zeeguu.conf.default](docker-files/zeeguu-api-core/apache-zeeguu-conf) to ``docker-files/zeeguu-api-core/apache-zeeguu.conf``
 and modify it accordingly.
@@ -73,6 +82,7 @@ To pass the variable, add the ``-e`` flag to docker run command. Example:
 ```sh
 docker run --net=host -d -e MICROSOFT_TRANSLATE_API_KEY='key' -e GOOGLE_TRANSLATE_API_KEY='key' -e WORDNIK_API_KEY='key'  --name=zeeguu-api-core zeeguu-api-core
 ```
+
 
 ### Storing MySQL data under a given directory on the system
 

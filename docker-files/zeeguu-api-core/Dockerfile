@@ -1,5 +1,9 @@
 FROM python:3.6
 
+# Uncomment the following two lines if you want to deploy the Flask Monitoring Dashboard
+#ARG API_VERSION
+#RUN test -n "$API_VERSION" || (echo "API_VERSION not set use --build-arg... " && false)
+
 # Install apache2
 RUN apt-get update
 RUN apt-get install -y \
@@ -20,6 +24,7 @@ RUN pip install -r requirements.txt
 RUN python setup.py install
 
 # Install Zeeguu-API
+# ==================
 # Apache will run Zeeguu-API as a WSGI module. It needs to create the DB for wordsstats:
 # https://github.com/zeeguu-ecosystem/Python-Wordstats/blob/master/wordstats/config.py#L1
 # under /opt/Zeeguu-API/wordinfo.db
@@ -28,16 +33,39 @@ WORKDIR /opt/Zeeguu-API
 RUN pip install -r requirements.txt
 RUN python setup.py install
 
+#ML: This is needed because the translators installer installs nltk in ~ (which in the
+# case of docker is /root. however, when run, it runs as www-data with ~ being /var/www 
+RUN python -m nltk.downloader -d /var/www/nltk_data punkt
+
+
+# Installing Flask Monitoring Dashboard (FMD)
+# ===========================================
+# uncomment the lines in this section if you want the FMD deployed
+#     also make sure to have the config/fmd.cfg file in place 
+
+# NOTE(mircealungu) pip install is here because fmd still can't be added to the 
+#     requiremens... a bug prevents the API tests from running when the FMD is deployed
+#     TODO: make sure to move the flask_monitoring_dashboard to requirements and remove
+#     this line once the tests problem is fixed
+
+#RUN pip install flask_monitoringdashboard
+
+#ENV FLASK_MONITORING_DASHBOARD_CONFIG=/opt/zeeguu/config/fmd.cfg
+#COPY --chown=www-data:www-data config/fmd.cfg /opt/zeeguu/config/fmd.cfg
+#RUN sed -i "s,APP_VERSION.*,APP_VERSION=$API_VERSION,g" /opt/zeeguu/config/fmd.cfg 
+
+# NOTE(mircealungu): ensure to only have the APP_VERSION since otherwise the GIT config supersedes it
+#RUN sed -i "s,GIT.*,,g" /opt/zeeguu/config/fmd.cfg 
+
+# END of FMD related code
+
+
 # Set default path to config
 ENV ZEEGUU_CORE_CONFIG=/opt/Zeeguu-Core/default_core.cfg
 ENV ZEEGUU_API_CONFIG=/opt/Zeeguu-API/default_api.cfg
 ENV ZEEGUU_CORE_LOG_DIR=/tmp/zeeguu-core-logs
 
-# set this if you want to use the FMD...
-#ENV FLASK_MONITORING_DASHBOARD_CONFIG=/opt/fmd/dashboard.cfg
 
-# TODO: Check if this is still required
-# RUN python -m zeeguu.populate
 
 # Enable Zeeguu-Web website
 COPY ./docker-files/zeeguu-api-core/apache-zeeguu-api.conf /etc/apache2/sites-available/apache-zeeguu-api.conf
