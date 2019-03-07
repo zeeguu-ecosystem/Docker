@@ -99,7 +99,7 @@ ENV PYTHONPATH=/usr/local/lib/python3.6/site-packages
 WORKDIR /opt
 
 # Zeeguu-Core
-ENV ZEEGUU_CORE_LOG_DIR=/tmp/zeeguu-core-logs
+ENV ZEEGUU_CORE_LOG_DIR=/opt/zeeguu-ecosystem-logs/zeeguu_core_logs
 # Zeeguu-Web
 ENV ZEEGUU_WEB_CONFIG=/opt/Zeeguu-Web/default_web.cfg
 # Teacher-Dashboard
