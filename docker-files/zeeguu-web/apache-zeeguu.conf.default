@@ -28,7 +28,7 @@
 
     # Teacher Dashboard
     ###########
-    WSGIDaemonProcess teacher_dash home=/opt/zeeguu-ecosystem-logs/ python-path=/opt/Zeeguu-Teacher-Dashboard/src/zeeguu_teacher_dashboard/
+    WSGIDaemonProcess teacher_dash home=/opt/zeeguu-data/ python-path=/opt/Zeeguu-Teacher-Dashboard/src/zeeguu_teacher_dashboard/
     WSGIScriptAlias /teacher /opt/Zeeguu-Teacher-Dashboard/src/teacherdash.wsgi
     <Location /teacher>
         WSGIProcessGroup teacher_dash
@@ -36,7 +36,7 @@
 
     # WEB 
     # ################
-    WSGIDaemonProcess zeeguu_web hhome=/opt/zeeguu-ecosystem-logs/ python-path=/opt/Zeeguu-Web/
+    WSGIDaemonProcess zeeguu_web hhome=/opt/zeeguu-data/ python-path=/opt/Zeeguu-Web/
     WSGIScriptAlias / /opt/Zeeguu-Web/zeeguu_web.wsgi
     <Location />
         WSGIProcessGroup zeeguu_web
