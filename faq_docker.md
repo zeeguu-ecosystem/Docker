@@ -22,5 +22,5 @@ sudo docker rm -f zeeguu-api-core ; sudo docker run --net=host -v /home/mlun/zee
 sudo docker build --build-arg API_VERSION=`cat .git/modules/Zeeguu-API/HEAD` -t zeeguu-api-core -f docker-files/zeeguu-api-core/Dockerfile . && sudo docker rm -f zeeguu-api-core ; sudo docker run --net=host -v /home/mlun/zeeguu_data:/opt/zeeguu_data -d -e MICROSOFT_TRANSLATE_API_KEY=$MICROSOFT_TRANSLATE_API_KEY -e GOOGLE_TRANSLATE_API_KEY=$GOOGLE_TRANSLATE_API_KEY -e WORDNIK_API_KEY=$WORDNIK_API_KEY  --name=zeeguu-api-core zeeguu-api-core
 
 #rebuild and redeploy Web
-sudo docker rm -f zeeguu-api-core zeeguu-web && sudo docker build -t zeeguu-web --build-arg ZEEGUU_API__EXTERNAL="https://api.zeeguu.org" -f docker-files/zeeguu-web/Dockerfile . && sudo docker rm -f zeeguu-web ; sudo docker run --net=host -v /etc/letsencrypt:/etc/letsencrypt -d --name=zeeguu-web zeeguu-web
+sudo docker build -t zeeguu-web --build-arg ZEEGUU_API__EXTERNAL="https://api.zeeguu.org" -f docker-files/zeeguu-web/Dockerfile . && sudo docker rm -f zeeguu-web ; sudo docker run --net=host -v /etc/letsencrypt:/etc/letsencrypt -v /home/mlun/zeeguu_data:/opt/zeeguu_data -d --name=zeeguu-web zeeguu-web
 
