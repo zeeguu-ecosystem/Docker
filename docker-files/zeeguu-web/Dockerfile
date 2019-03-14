@@ -104,6 +104,7 @@ WORKDIR /opt
 
 # Zeeguu-Web
 ENV ZEEGUU_WEB_CONFIG=/opt/zeeguu/config/web.cfg
+
 # Teacher-Dashboard
 ENV TEACHER_DASHBOARD_CONFIG=/opt/zeeguu/config/teacherdash.cfg
 ENV ZEEGUU_API=$ZEEGUU_API
