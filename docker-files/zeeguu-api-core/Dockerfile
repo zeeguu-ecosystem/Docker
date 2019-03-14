@@ -1,6 +1,6 @@
 FROM python:3.6
 
-# To deploy the Flask Monitoring Dashboard uncomment the following two lines (and the corresponding section below)
+# To not deploy the Flask Monitoring Dashboard comment the following two lines (and the corresponding section below)
 ARG API_VERSION
 RUN test -n "$API_VERSION" || (echo "API_VERSION not set use --build-arg... " && false)
 
@@ -40,8 +40,7 @@ RUN python -m nltk.downloader -d /var/www/nltk_data punkt
 
 ## Installing Flask Monitoring Dashboard (FMD)
 ## ===========================================
-## uncomment the lines in this section if you want the FMD deployed
-##     also make sure to have the config/fmd.cfg file in place 
+## comment the lines in this section if you do not want the FMD deployed
 
 RUN pip install flask_monitoringdashboard
 
