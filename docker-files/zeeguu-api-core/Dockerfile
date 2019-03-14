@@ -61,8 +61,11 @@ RUN python -m nltk.downloader -d /var/www/nltk_data punkt
 
 
 # Set default path to config
-ENV ZEEGUU_CORE_CONFIG=/opt/Zeeguu-Core/default_core.cfg
-ENV ZEEGUU_API_CONFIG=/opt/Zeeguu-API/default_api.cfg
+COPY --chown=www-data:www-data config/core.cfg /opt/zeegu/config/core.cfg
+ENV ZEEGUU_CORE_CONFIG=/opt/zeeguu/config/core.cfg
+
+COPY --chown=www-data:www-data config/api.cfg /opt/zeegu/config/api.cfg
+ENV ZEEGUU_API_CONFIG=/opt/zeeguu/config/api.cfg
 
 
 
