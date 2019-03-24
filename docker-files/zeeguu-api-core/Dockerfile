@@ -78,4 +78,7 @@ RUN sed -i "s,Listen 80,Listen 8080,g" /etc/apache2/ports.conf
 
 WORKDIR /opt/Zeeguu-API
 
+# Create the zeeguu-data folder
+RUN mkdir /opt/zeeguu-data && chown www-data:www-data /opt/zeeguu-data
+
 CMD  /usr/sbin/apache2ctl -D FOREGROUND
