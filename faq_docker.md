@@ -13,9 +13,6 @@ sudo docker run --net=host -v /home/mlun/zeeguu-data/mysql:/var/lib/mysql -d --n
 # show error log in api
 sudo docker exec zeeguu-api-core cat /var/log/apache2/error.log
 
-#restart api
-sudo docker rm -f zeeguu-api-core ; sudo docker run --net=host -v /home/mlun/zeeguu-data/config/fmd.cfg:/opt/fmd/dashboard.cfg -v /etc/letsencrypt:/etc/letsencrypt -v /home/mlun/zeeguu-data:/opt/zeeguu-data -d -e MICROSOFT_TRANSLATE_API_KEY=$MICROSOFT_TRANSLATE_API_KEY -e GOOGLE_TRANSLATE_API_KEY=$GOOGLE_TRANSLATE_API_KEY -e WORDNIK_API_KEY=$WORDNIK_API_KEY  --name=zeeguu-api-core zeeguu-api-core
-
 
 # recompile and redeploy api
 
