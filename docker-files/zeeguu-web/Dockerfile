@@ -90,8 +90,12 @@ COPY ./docker-files/zeeguu-web/apache-zeeguu.conf /etc/apache2/sites-available/a
 RUN a2dissite 000-default.conf
 RUN a2ensite apache-zeeguu.conf
 
+# Copy the config files
+COPY --chown=www-data:www-data config/web.cfg /opt/zeeguu/config/web.cfg
+COPY --chown=www-data:www-data config/teacherdash.cfg /opt/zeeguu/config/teacherdash.cfg
+
 RUN sed -i "s,http://127.0.0.1:8080,$ZEEGUU_API__INTERNAL,g" /etc/apache2/sites-available/apache-zeeguu.conf
-RUN sed -i "s,http://127.0.0.1:9001,$ZEEGUU_API__INTERNAL/,g" /opt/Zeeguu-Web/default_web.cfg
+RUN sed -i "s,http://127.0.0.1:9001,$ZEEGUU_API__INTERNAL/,g" /opt/zeeguu/config/web.cfg
 
 # mod_wsgi will not be able to import python packages without this
 ENV PYTHONPATH=/usr/local/lib/python3.6/site-packages
@@ -99,9 +103,10 @@ ENV PYTHONPATH=/usr/local/lib/python3.6/site-packages
 WORKDIR /opt
 
 # Zeeguu-Web
-ENV ZEEGUU_WEB_CONFIG=/opt/Zeeguu-Web/default_web.cfg
+ENV ZEEGUU_WEB_CONFIG=/opt/zeeguu/config/web.cfg
+
 # Teacher-Dashboard
-ENV TEACHER_DASHBOARD_CONFIG=/opt/Zeeguu-Teacher-Dashboard/src/default.cfg
+ENV TEACHER_DASHBOARD_CONFIG=/opt/zeeguu/config/teacherdash.cfg
 ENV ZEEGUU_API=$ZEEGUU_API
 
 RUN a2enmod rewrite

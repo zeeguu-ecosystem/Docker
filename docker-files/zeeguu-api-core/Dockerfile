@@ -1,8 +1,8 @@
 FROM python:3.6
 
-# To deploy the Flask Monitoring Dashboard uncomment the following two lines (and the corresponding section below)
-#ARG API_VERSION
-#RUN test -n "$API_VERSION" || (echo "API_VERSION not set use --build-arg... " && false)
+# To not deploy the Flask Monitoring Dashboard comment the following two lines (and the corresponding section below)
+ARG API_VERSION
+RUN test -n "$API_VERSION" || (echo "API_VERSION not set use --build-arg... " && false)
 
 # Install apache2
 RUN apt-get update
@@ -40,29 +40,31 @@ RUN python -m nltk.downloader -d /var/www/nltk_data punkt
 
 ## Installing Flask Monitoring Dashboard (FMD)
 ## ===========================================
-## uncomment the lines in this section if you want the FMD deployed
-##     also make sure to have the config/fmd.cfg file in place 
+## comment the lines in this section if you do not want the FMD deployed
 
-#RUN pip install flask_monitoringdashboard
+RUN pip install flask_monitoringdashboard
 
 ## NOTE(mircealungu) previous pip install is here because fmd still can't be added to the 
 ##     requiremens... a bug prevents the API tests from running when the FMD is deployed
 ##     TODO: make sure to move the flask_monitoring_dashboard to requirements and remove
 ##     this line once the tests problem is fixed
 
-#ENV FLASK_MONITORING_DASHBOARD_CONFIG=/opt/zeeguu/config/fmd.cfg
-#COPY --chown=www-data:www-data config/fmd.cfg /opt/zeeguu/config/fmd.cfg
-#RUN sed -i "s,APP_VERSION.*,APP_VERSION=$API_VERSION,g" /opt/zeeguu/config/fmd.cfg 
+COPY --chown=www-data:www-data config/fmd.cfg /opt/zeeguu/config/fmd.cfg
+ENV FLASK_MONITORING_DASHBOARD_CONFIG=/opt/zeeguu/config/fmd.cfg
+RUN sed -i "s,APP_VERSION.*,APP_VERSION=$API_VERSION,g" /opt/zeeguu/config/fmd.cfg 
 
 # NOTE(mircealungu): ensure to only have the APP_VERSION since otherwise the GIT config supersedes it
-#RUN sed -i "s,GIT.*,,g" /opt/zeeguu/config/fmd.cfg 
+RUN sed -i "s,GIT.*,,g" /opt/zeeguu/config/fmd.cfg 
 
 # END of FMD related code
 
 
 # Set default path to config
-ENV ZEEGUU_CORE_CONFIG=/opt/Zeeguu-Core/default_core.cfg
-ENV ZEEGUU_API_CONFIG=/opt/Zeeguu-API/default_api.cfg
+COPY --chown=www-data:www-data config/core.cfg /opt/zeeguu/config/core.cfg
+ENV ZEEGUU_CORE_CONFIG=/opt/zeeguu/config/core.cfg
+
+COPY --chown=www-data:www-data config/api.cfg /opt/zeeguu/config/api.cfg
+ENV ZEEGUU_API_CONFIG=/opt/zeeguu/config/api.cfg
 
 
 

@@ -15,6 +15,17 @@ Docker needs to be installed. Install it with:
 sudo apt-get install docker.io -y
 ```
 
+### Configuration
+
+Each of the subprojects has it's own configuration file (core, api, web, teacherdash, etc.).
+A set of reasonable defaults is already present in the corresponding ./config/ folder
+for each of these projects. If you want to run zeeguu with these defaults, simply 
+copy each of the folders to a corresponding file w/o the .default extension. if later you 
+want to modify the config, you can modify these .cfg files which are now not under version
+control (and are actually actively ignored by the .gitignore file, such that you don't 
+upload secrets by mistake). 
+
+
 ### Building automatically
 
 Set the environment variables (that can be found at the top of [config_vars.sh](config_vars.sh)) with the API keys for the third party services.
@@ -39,7 +50,7 @@ docker build -t zeeguu-api-core -f docker-files/zeeguu-api-core/Dockerfile .
 ```
 
 *Note:* To deploy the Flask-MonitoringDashboard with the API
-uncomment the corresponding lines [docker-files/zeeguu-api-core/Dockerfile](docker-files/zeeguu-api-core/Dockerfile)
+make sure that the corresponding lines are uncommented in [docker-files/zeeguu-api-core/Dockerfile](docker-files/zeeguu-api-core/Dockerfile)
 . Then make sure to pass the API_VERSION as a --build-arg. 
 Something like: 
 ```sh

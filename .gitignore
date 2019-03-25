@@ -1,3 +1,8 @@
 
-docker-files/zeeguu-web/apache-zeeguu.conf
 config/fmd.cfg
+config/core.cfg
+config/api.cfg
+config/teacherdash.cfg
+config/web.cfg
+
+docker-files/zeeguu-web/apache-zeeguu.conf
