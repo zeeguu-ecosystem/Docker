@@ -102,6 +102,9 @@ ENV PYTHONPATH=/usr/local/lib/python3.6/site-packages
 
 WORKDIR /opt
 
+# Create the zeeguu-data folder
+RUN mkdir /opt/zeeguu-data && chown www-data:www-data /opt/zeeguu-data
+
 # Zeeguu-Web
 ENV ZEEGUU_WEB_CONFIG=/opt/zeeguu/config/web.cfg
 
