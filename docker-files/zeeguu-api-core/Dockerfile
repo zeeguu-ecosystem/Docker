@@ -36,6 +36,7 @@ RUN python setup.py install
 #ML: This is needed because the translators installer installs nltk in ~ (which in the
 # case of docker is /root. however, when run, it runs as www-data with ~ being /var/www 
 RUN python -m nltk.downloader -d /var/www/nltk_data punkt
+RUN python -m nltk.downloader -d /var/www/nltk_data averaged_perceptron_tagger
 
 
 ## Installing Flask Monitoring Dashboard (FMD)
