@@ -63,6 +63,13 @@
         Allow from all
     </Directory>
 
+    Alias /teacher-react /var/www/teacher-react
+
+    <Directory /var/www/teacher-react/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+
     Alias /static /var/www/zeeguu-web/zeeguu_web/static
 
     <Directory /var/www/zeeguu-web/zeeguu_web/static/>
