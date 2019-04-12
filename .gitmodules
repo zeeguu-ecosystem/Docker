@@ -16,6 +16,3 @@
 [submodule "Zeeguu-Reader"]
 	path = Zeeguu-Reader
 	url = https://github.com/zeeguu-ecosystem/Zeeguu-Reader
-[submodule "Zeeguu-Teacher-Dashboard--React"]
-	path = Zeeguu-Teacher-Dashboard--React
-	url = https://github.com/zeeguu-ecosystem/Zeeguu-Teacher-Dashboard--React.git
