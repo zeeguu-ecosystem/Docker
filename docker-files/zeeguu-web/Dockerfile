@@ -99,13 +99,13 @@ RUN sed -i "s,http://127.0.0.1:9001,$ZEEGUU_API__INTERNAL/,g" /opt/zeeguu/config
 
 
 # Teacher Dashboard React
-COPY --chown=www-data:www-data Zeeguu-Teacher-Dashboard--React /opt/Zeeguu-Teacher-Dashboard--React
-WORKDIR /opt/Zeeguu-Teacher-Dashboard--React/zeeguu-teacher-dashboard
+COPY --chown=www-data:www-data Zeeguu-Teacher-Dashboard-React /opt/Zeeguu-Teacher-Dashboard-React
+WORKDIR /opt/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard
 
 RUN echo "REACT_APP_ZEEGUU_API_ENDPOINT_PROD=$ZEEGUU_API__EXTERNAL" > .env
 RUN npm install
 RUN npm build
-RUN cp -r /opt/Zeeguu-Teacher-Dashboard--React/zeeguu-teacher-dashboard/build /var/www/teacher-react
+RUN cp -r /opt/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard/build /var/www/teacher-react
 
 
 
