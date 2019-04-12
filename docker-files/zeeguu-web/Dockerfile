@@ -104,7 +104,7 @@ WORKDIR /opt/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard
 
 RUN echo "REACT_APP_ZEEGUU_API_ENDPOINT_PROD=$ZEEGUU_API__EXTERNAL" > .env
 RUN npm install
-RUN npm build
+RUN npm run build
 RUN cp -r /opt/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard/build /var/www/teacher-react
 
 
