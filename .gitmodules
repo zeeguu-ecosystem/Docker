@@ -19,3 +19,6 @@
 [submodule "Zeeguu-Teacher-Dashboard--React"]
 	path = Zeeguu-Teacher-Dashboard--React
 	url = https://github.com/zeeguu-ecosystem/Zeeguu-Teacher-Dashboard--React.git
+[submodule "Zeeguu-Teacher-Dashboard-React"]
+	path = Zeeguu-Teacher-Dashboard-React
+	url = https://github.com/zeeguu-ecosystem/Zeeguu-Teacher-Dashboard--React.git
