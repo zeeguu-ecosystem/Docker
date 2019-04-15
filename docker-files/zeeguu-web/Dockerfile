@@ -103,6 +103,7 @@ COPY --chown=www-data:www-data Zeeguu-Teacher-Dashboard-React /opt/Zeeguu-Teache
 WORKDIR /opt/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard
 
 RUN echo "REACT_APP_ZEEGUU_API_ENDPOINT_PROD=$ZEEGUU_API__EXTERNAL" > .env
+RUN echo "REACT_APP_ROOT_NAME=teacher-react" >> .env
 RUN npm install
 RUN npm run build
 RUN cp -r /opt/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard/build /var/www/teacher-react
