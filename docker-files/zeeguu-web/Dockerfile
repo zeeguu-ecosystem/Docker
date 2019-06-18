@@ -84,29 +84,20 @@ RUN cp -r /opt/Zeeguu-Web /var/www/zeeguu-web
 RUN chown www-data /var/www
 RUN chgrp www-data /var/www
 
-# Enable Zeeguu-Web website
-COPY ./docker-files/zeeguu-web/apache-zeeguu.conf /etc/apache2/sites-available/apache-zeeguu.conf
-# Disable default website and enable zeeguu
-RUN a2dissite 000-default.conf
-RUN a2ensite apache-zeeguu.conf
 
 # Copy the config files
 COPY --chown=www-data:www-data config/web.cfg /opt/zeeguu/config/web.cfg
-COPY --chown=www-data:www-data config/teacherdash.cfg /opt/zeeguu/config/teacherdash.cfg
-
-RUN sed -i "s,http://127.0.0.1:8080,$ZEEGUU_API__INTERNAL,g" /etc/apache2/sites-available/apache-zeeguu.conf
-RUN sed -i "s,http://127.0.0.1:9001,$ZEEGUU_API__INTERNAL/,g" /opt/zeeguu/config/web.cfg
-
+#COPY --chown=www-data:www-data config/teacherdash.cfg /opt/zeeguu/config/teacherdash.cfg
 
 # Teacher Dashboard React
 COPY --chown=www-data:www-data Zeeguu-Teacher-Dashboard-React /opt/Zeeguu-Teacher-Dashboard-React
 WORKDIR /opt/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard
 
 RUN echo "REACT_APP_ZEEGUU_API_ENDPOINT_PROD=$ZEEGUU_API__EXTERNAL" > .env
-RUN echo "REACT_APP_ROOT_NAME=teacher-react" >> .env
+RUN echo "REACT_APP_ROOT_NAME=teacher-dashboard" >> .env
 RUN npm install
 RUN npm run build
-RUN cp -r /opt/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard/build /var/www/teacher-react
+RUN cp -r /opt/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard/build /var/www/teacher-dashboard
 
 
 
@@ -122,8 +113,19 @@ RUN mkdir /opt/zeeguu-data && chown www-data:www-data /opt/zeeguu-data
 ENV ZEEGUU_WEB_CONFIG=/opt/zeeguu/config/web.cfg
 
 # Teacher-Dashboard
-ENV TEACHER_DASHBOARD_CONFIG=/opt/zeeguu/config/teacherdash.cfg
-ENV ZEEGUU_API=$ZEEGUU_API
+#ENV TEACHER_DASHBOARD_CONFIG=/opt/zeeguu/config/teacherdash.cfg
+#ENV ZEEGUU_API=$ZEEGUU_API
+
+# Enable Zeeguu-Web website
+COPY ./docker-files/zeeguu-web/apache-zeeguu.conf /etc/apache2/sites-available/apache-zeeguu.conf
+
+RUN sed -i "s,http://127.0.0.1:8080,$ZEEGUU_API__INTERNAL,g" /etc/apache2/sites-available/apache-zeeguu.conf
+RUN sed -i "s,http://127.0.0.1:9001,$ZEEGUU_API__INTERNAL/,g" /opt/zeeguu/config/web.cfg
+
+# Disable default website and enable zeeguu
+RUN a2dissite 000-default.conf
+RUN a2ensite apache-zeeguu.conf
+
 
 RUN a2enmod rewrite
 RUN a2enmod proxy
