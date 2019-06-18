@@ -27,7 +27,7 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 </VirtualHost>
 
 
-
+# Always redirect to www
 <VirtualHost *:443>
 
     ServerName zeeguu.local
@@ -45,13 +45,6 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
         Require all granted
     </Directory>
 
-    ###########
-    WSGIDaemonProcess teacher_dash python-path=/opt/Zeeguu-Teacher-Dashboard/teacher_dashboard/teacher_dashboard/
-    WSGIScriptAlias /teacher /opt/Zeeguu-Teacher-Dashboard/teacher_dashboard/teacherdash.wsgi
-    <Location /teacher>
-        WSGIProcessGroup teacher_dash
-    </Location>
-
     # WEB 
     # ################
     WSGIDaemonProcess zeeguu_web python-path=/opt/Zeeguu-Web/
@@ -66,12 +59,6 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
         </Files>
     </Directory>
 
-    <Directory "/opt/Zeeguu-Teacher-Dashboard/teacher_dashboard">
-        <Files "teacherdash.wsgi">
-            Require all granted
-        </Files>
-    </Directory>
-
     <Directory /var/www/zeeguu-web/zeeguu_web/app/>
         Header set Access-Control-Allow-Origin "*"
         WSGIProcessGroup zeeguu_web
@@ -81,12 +68,34 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
         Allow from all
     </Directory>
 
+    # Static Stuff
     Alias /static /var/www/zeeguu-web/zeeguu_web/static
 
     <Directory /var/www/zeeguu-web/zeeguu_web/static/>
         Order allow,deny
         Allow from all
     </Directory>
+
+
+    # Teacher Dashboard
+    Alias /teacher-dashboard /var/www/teacher-dashboard
+
+    <Directory /var/www/teacher-dashboard/>
+        Order allow,deny
+        Allow from all
+
+        # HTML 5 mode routing
+        # from: https://gist.github.com/leocaseiro/4305e06948aa97e77c93
+        RewriteEngine on
+        RewriteCond %{REQUEST_FILENAME} -s [OR]
+        RewriteCond %{REQUEST_FILENAME} -l [OR]
+        RewriteCond %{REQUEST_FILENAME} -d
+        RewriteRule ^.*$ - [NC,L]
+        RewriteRule ^(.*) /teacher-dashboard/index.html [NC,L]
+
+    </Directory>
+
+
     ErrorLog ${APACHE_LOG_DIR}/error.log
     LogLevel info
     CustomLog ${APACHE_LOG_DIR}/access.log combined
