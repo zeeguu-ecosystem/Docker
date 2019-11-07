@@ -18,13 +18,9 @@ RUN apt-get update
 RUN apt-get install -y \
     apache2 \
     apache2-dev \
-    vim
-
-# Install npm
-WORKDIR /tmp
-RUN curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
-RUN bash nodesource_setup.sh
-RUN apt-get install nodejs
+    vim \
+    nodejs \
+    npm 
 
 # Install an up to date wsgi
 RUN pip install mod_wsgi
