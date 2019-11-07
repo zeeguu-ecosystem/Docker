@@ -5,6 +5,11 @@
 # export GOOGLE_TRANSLATE_API_KEY=''
 # export WORDNIK_API_KEY=''
 
+# on some Linuxes route and ifconfig are not available
+if ! {  which route >/dev/null &&  which ifconfig >/dev/null  ; } ; then
+    apt-get install -y net-tools
+fi
+
 # Set to YES if running in the cloud
 RUNNING_IN_CLOUD='NO'
 
