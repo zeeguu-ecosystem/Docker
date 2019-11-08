@@ -5,8 +5,11 @@ source config_vars.sh
 set -e
 
 ls config/ | grep default | while read cfgfilename; do
-    new_cfgfilename=${cfgfilename::-8}
-    cp -n config/$cfgfilename config/$new_cfgfilename
+    new_cfgfilename=`echo ${cfgfilename} | sed s/.default//g`
+
+    if [ ! -f config/$new_cfgfilename ]; then
+    	cp -n config/$cfgfilename config/$new_cfgfilename
+    fi
 done
 
 # Start MySQL server
