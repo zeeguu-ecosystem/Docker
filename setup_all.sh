@@ -43,8 +43,8 @@ echo "Updating your etc/hosts with the api.zeeguu.local and www.zeeguu.local ent
 echo "You might be asked to provide your sudo password"
 echo ""
 
-echo '127.0.0.1 api.zeeguu.local' | sudo tee -a /etc/hosts
-echo '127.0.0.1 www.zeeguu.local' | sudo tee -a /etc/hosts
+grep -qF 'api.zeeguu.local' /etc/hosts || echo '127.0.0.1 api.zeeguu.local' | sudo tee -a /etc/hosts
+grep -qF 'www.zeeguu.local' /etc/hosts || echo '127.0.0.1 www.zeeguu.local' | sudo tee -a /etc/hosts
 
 echo ""
 echo "To try out the api you can "
