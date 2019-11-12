@@ -9,7 +9,7 @@
 if ! {  which route >/dev/null &&  which ifconfig >/dev/null  ; } ; then
     apt-get install -y net-tools
 fi
-# same with curl
+# install curl if not existant
 if ! {  which curl >/dev/null ; } ; then
     apt-get install curl -y
 fi
