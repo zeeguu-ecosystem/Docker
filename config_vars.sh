@@ -9,6 +9,10 @@
 if ! {  which route >/dev/null &&  which ifconfig >/dev/null  ; } ; then
     apt-get install -y net-tools
 fi
+# same with curl
+if ! {  which curl >/dev/null ; } ; then
+    apt-get install curl -y
+fi
 
 # Set to YES if running in the cloud
 RUNNING_IN_CLOUD='NO'
