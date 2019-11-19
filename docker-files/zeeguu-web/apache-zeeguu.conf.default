@@ -27,12 +27,22 @@
     </Directory>
 
     # Teacher Dashboard
-    ###########
-    WSGIDaemonProcess teacher_dash home=/opt/zeeguu-data/ python-path=/opt/Zeeguu-Teacher-Dashboard/src/zeeguu_teacher_dashboard/
-    WSGIScriptAlias /teacher /opt/Zeeguu-Teacher-Dashboard/src/teacherdash.wsgi
-    <Location /teacher>
-        WSGIProcessGroup teacher_dash
-    </Location>
+    Alias /teacher-dashboard /var/www/teacher-dashboard
+
+    <Directory /var/www/teacher-dashboard/>
+        Order allow,deny
+        Allow from all
+
+        # HTML 5 mode routing
+        # from: https://gist.github.com/leocaseiro/4305e06948aa97e77c93
+        RewriteEngine on
+        RewriteCond %{REQUEST_FILENAME} -s [OR]
+        RewriteCond %{REQUEST_FILENAME} -l [OR]
+        RewriteCond %{REQUEST_FILENAME} -d
+        RewriteRule ^.*$ - [NC,L]
+        RewriteRule ^(.*) /teacher-dashboard/index.html [NC,L]
+
+    </Directory>
 
     # WEB 
     # ################
