@@ -51,7 +51,7 @@ fi
 cp -n docker-files/zeeguu-web/apache-zeeguu.conf.default docker-files/zeeguu-web/apache-zeeguu.conf
 
 # Build and run the Web UI
-docker build -t zeeguu-web --build-arg ZEEGUU_API__EXTERNAL="http://api.zeeguu.local" -f docker-files/zeeguu-web/Dockerfile .
+docker build -t zeeguu-web --build-arg ZEEGUU_API__EXTERNAL="$ZEEGUU_API_EXTERNAL" -f docker-files/zeeguu-web/Dockerfile .
 docker run --net=host -d --name=zeeguu-web zeeguu-web
 
 # Add a test RSS feed
