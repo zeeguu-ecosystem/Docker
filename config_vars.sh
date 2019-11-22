@@ -15,6 +15,11 @@ if ! {  which curl >/dev/null ; } ; then
     apt-get install -y curl
 fi
 
+# on some Linuxes dig is not available
+if ! {  which dig >/dev/null ; } ; then
+    apt-get install -y dnsutils
+fi
+
 
 # Set to YES if running in the cloud
 RUNNING_IN_CLOUD='NO'
