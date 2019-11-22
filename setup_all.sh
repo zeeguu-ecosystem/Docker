@@ -45,6 +45,7 @@ then
   echo "installing the Web..."
 else
   exit 0
+fi
 
 
 cp -n docker-files/zeeguu-web/apache-zeeguu.conf.default docker-files/zeeguu-web/apache-zeeguu.conf
