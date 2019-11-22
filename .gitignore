@@ -6,3 +6,8 @@ config/teacherdash.cfg
 config/web.cfg
 
 docker-files/zeeguu-web/apache-zeeguu.conf
+
+.idea/*
+.vagrant*
+
+.DS_Store*
