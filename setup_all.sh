@@ -4,6 +4,7 @@ source config_vars.sh
 
 # Install Docker if necessary
 if ! {  which docker >/dev/null ; } ; then
+    apt-get update
     apt-get install docker.io -y
 fi
 
