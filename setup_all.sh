@@ -38,6 +38,15 @@ docker run --net=host -d \
     -e WORDNIK_API_KEY="$WORDNIK_API_KEY" \
     --name=zeeguu-api-core zeeguu-api-core
 
+
+read -p "Do you want to install the Zeeguu-Web? <y/N> " prompt
+if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]]
+then
+  echo "installing the Web..."
+else
+  exit 0
+
+
 cp -n docker-files/zeeguu-web/apache-zeeguu.conf.default docker-files/zeeguu-web/apache-zeeguu.conf
 
 # Build and run the Web UI
