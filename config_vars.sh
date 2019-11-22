@@ -1,9 +1,38 @@
 #!/bin/bash
 
-# API keys should be in the environment; otherwise, you can also set them here...
+# <<------- CONFIGURATION START ------->>
+
+# The following API keys should be in the environment; 
+# otherwise, you can also set them here:
+# 
+#     MICROSOFT_TRANSLATE_API_KEY
+#     GOOGLE_TRANSLATE_API_KEY
+#     WORDNIK_API_KEY
+#     ZEEGUU_API_EXTERNAL
+# 
+
 # export MICROSOFT_TRANSLATE_API_KEY=''
 # export GOOGLE_TRANSLATE_API_KEY=''
 # export WORDNIK_API_KEY=''
+
+
+# this next var (ZEEGUU_API_EXTERNAL) is used to customize
+# the build of the Web container such that it knows where
+# it can find the API. 
+
+# On a Linux development machine the default is
+# 
+# export ZEEGUU_API_EXTERNAL='http://api.zeeguu.local'
+# 
+# However, when running from mac with Zeeguu deployed in 
+# VirtualBox the api is by default located at
+# 
+# export ZEEGUU_API_EXTERNAL='http://api.zeeguu.local:8080'
+# 
+# 
+
+# <<------- CONFIGURATION END ------->>
+
 
 # on some Linuxes route and ifconfig are not available
 if ! {  which route >/dev/null &&  which ifconfig >/dev/null  ; } ; then
