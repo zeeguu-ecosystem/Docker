@@ -2,6 +2,12 @@
 
 source config_vars.sh
 
+# on some Linuxes dig is not available
+if ! {  which docker >/dev/null ; } ; then
+    apt-get apt-get install docker.io -y
+fi
+
+
 set -e
 
 ls config/ | grep default | while read cfgfilename; do
