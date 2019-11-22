@@ -2,9 +2,9 @@
 
 source config_vars.sh
 
-# on some Linuxes dig is not available
+# Install Docker if necessary
 if ! {  which docker >/dev/null ; } ; then
-    apt-get apt-get install docker.io -y
+    apt-get install docker.io -y
 fi
 
 
