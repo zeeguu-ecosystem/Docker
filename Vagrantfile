@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-=# NOTE: 
+# NOTE: 
 # This VM will contain an apache web server inside it that
 # serves the zeeguu web on http://www.zeeguu.local:8080
 # and the API on http://api.zeeguu.local:8080
