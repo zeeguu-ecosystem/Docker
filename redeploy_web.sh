@@ -1,3 +1,3 @@
 #! /bin/bash
 
-docker restart zeeguu-web-with-volume
+docker restart zeeguu-web-dev
