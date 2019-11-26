@@ -1,6 +1,5 @@
 #! /bin/bash
 
-
 docker stop zeeguu-web 
 docker rm -f zeeguu-web-with-volume
 
