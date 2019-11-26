@@ -18,10 +18,14 @@ RUN a2enmod wsgi
 RUN a2enmod headers
 
 # Install Zeeguu-Core
-COPY Zeeguu-Core /opt/Zeeguu-Core
+COPY --chown=www-data:www-data Zeeguu-Core /opt/Zeeguu-Core
 WORKDIR /opt/Zeeguu-Core
 RUN pip install -r requirements.txt
-RUN python setup.py install
+
+#for i don't know what reason, if we 'install' it here, we can't uninstall it later!
+# thus we 'develop'
+RUN python setup.py develop
+
 
 # Install Zeeguu-API
 # ==================
