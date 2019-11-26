@@ -46,7 +46,7 @@
 
     # WEB 
     # ################
-    WSGIDaemonProcess zeeguu_web home=/opt/zeeguu-data/ python-path=/opt/Zeeguu-Web/
+    WSGIDaemonProcess zeeguu_web user=www-data group=www-data home=/opt/zeeguu-data/ python-path=/opt/Zeeguu-Web/
     WSGIScriptAlias / /opt/Zeeguu-Web/zeeguu_web.wsgi
     <Location />
         WSGIProcessGroup zeeguu_web
