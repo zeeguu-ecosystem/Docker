@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 source setup_all.sh
 
 # Add a test RSS feed

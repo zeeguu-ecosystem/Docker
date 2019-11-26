@@ -7,15 +7,6 @@
 
 source config_vars.sh
 
-# Install Docker if necessary
-if ! {  which docker >/dev/null ; } ; then
-    apt-get update
-    apt-get install docker.io -y
-fi
-
-
-set -e
-
 ls config/ | grep default | while read cfgfilename; do
     new_cfgfilename=`echo ${cfgfilename} | sed s/.default//g`
 
