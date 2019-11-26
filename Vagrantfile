@@ -98,8 +98,6 @@ Vagrant.configure("2") do |config|
 
   $every_boot = <<-SHELL
     bash prepare_for_develop.sh
-
-    docker start zeeguu-web zeeguu-api-core zeeguu-mysql
   SHELL
 
   config.vm.provision "shell", inline: $first_boot
