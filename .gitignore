@@ -1,4 +1,6 @@
 
+config_vars.sh
+
 config/fmd.cfg
 config/core.cfg
 config/api.cfg
