@@ -13,3 +13,5 @@ docker-files/zeeguu-web/apache-zeeguu.conf
 .vagrant*
 .DS_Store
 *-console.log
+
+zeeguu-data*
