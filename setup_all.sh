@@ -5,7 +5,15 @@
 # When setting up development run ./setup_development.sh
 # 
 
-source config_vars.sh
+
+CONFIG_VARS="config_vars.sh"
+if [ ! -f $CONFIG_VARS ]; then	
+	cp $CONFIG_VARS.default $CONFIG_VARS
+	echo "Please edit $CONFIG_VARS to set up at least the ZEEGUU_API__EXTERNAL config option"
+    exit
+fi
+source $CONFIG_VARS
+
 
 ls config/ | grep default | while read cfgfilename; do
     new_cfgfilename=`echo ${cfgfilename} | sed s/.default//g`
