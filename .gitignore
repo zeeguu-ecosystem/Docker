@@ -11,3 +11,4 @@ docker-files/zeeguu-web/apache-zeeguu.conf
 .vagrant*
 
 .DS_Store*
+ubuntu-bionic-18.04-cloudimg-console.log
