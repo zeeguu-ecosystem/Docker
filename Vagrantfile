@@ -90,13 +90,12 @@ Vagrant.configure("2") do |config|
 
     sudo usermod -aG docker vagrant
 
-    echo "press enter to reboot; that will ensure that vagrant user has been added to the docker group"
-    read
-    reboot
+    echo "reboot your VM to ensure that vagrant user has been added to the docker group"
 
   SHELL
 
   $every_boot = <<-SHELL
+    cd /vagrant
     bash prepare_for_develop.sh
   SHELL
 
