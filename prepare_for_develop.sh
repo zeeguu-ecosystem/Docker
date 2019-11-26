@@ -15,6 +15,6 @@ docker stop zeeguu-api-core
 docker rm -f zeeguu-api-core-dev > /dev/null 2>&1
 
 docker run --net=host -d --name=zeeguu-api-core-dev -v $(pwd)/Zeeguu-API:/opt/Zeeguu-API zeeguu-api-core
-docker exec zeeguu-api-core-dev python ./Zeeguu-API/setup.py develop
+docker exec zeeguu-api-core-dev python ./setup.py develop
 
 echo "you can make changes to Zeeguu-Web & Zeeguu-API locally now"
