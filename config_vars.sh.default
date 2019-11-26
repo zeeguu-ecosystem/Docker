@@ -2,22 +2,24 @@
 
 # <<------- CONFIGURATION START ------->>
 
-# The following API keys should be eitther set here 
-# or defined elsewhere but they should be available
-# in the environment in which the docker containers 
-# are built.
+# The following API keys should be in the environment; 
+# otherwise, you can also set them here:
 # 
-#     ZEEGUU_API_EXTERNAL
 #     MICROSOFT_TRANSLATE_API_KEY
 #     GOOGLE_TRANSLATE_API_KEY
 #     WORDNIK_API_KEY
+#     ZEEGUU_API_EXTERNAL
 # 
-# Uncomment the corresponding lines below to define them.
+
+# export MICROSOFT_TRANSLATE_API_KEY=''
+# export GOOGLE_TRANSLATE_API_KEY=''
+# export WORDNIK_API_KEY=''
 
 
-# 1. The var (ZEEGUU_API_EXTERNAL) is used to customize
+# this next var (ZEEGUU_API_EXTERNAL) is used to customize
 # the build of the Web container such that it knows where
 # it can find the API. 
+
 # On a Linux development machine the default is
 # 
 # export ZEEGUU_API_EXTERNAL='http://api.zeeguu.local'
@@ -29,12 +31,9 @@
 # 
 # 
 
-# The following keys are used by the translation feature
-# 
-# export MICROSOFT_TRANSLATE_API_KEY=''
-# export GOOGLE_TRANSLATE_API_KEY=''
-# export WORDNIK_API_KEY=''
 
+# Set to YES if running in the cloud
+RUNNING_IN_CLOUD='NO'
 
 # <<------- CONFIGURATION END ------->>
 
@@ -55,18 +54,6 @@ if ! {  which dig >/dev/null ; } ; then
 fi
 
 
-# Set to YES if running in the cloud
-RUNNING_IN_CLOUD='NO'
-
-# Trying to detect if running in a cloud...
-curl metadata.google.internal -si 2>&1>/dev/null
-if [ $? -eq 0 ]; then
-    RUNNING_IN_CLOUD='YES'
-fi
-curl http://169.254.169.254/1.0/meta-data/instance-id -s 2>&1>/dev/null
-if [ $? -eq 0 ]; then
-    RUNNING_IN_CLOUD='YES'
-fi
 
 if [ "$RUNNING_IN_CLOUD" == "NO" ]; then
     DEFAULT_INTERFACE=$(route | grep -m 1 -oP '^default.*\s+\K.*')
