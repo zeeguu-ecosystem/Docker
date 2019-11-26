@@ -86,7 +86,7 @@ Vagrant.configure("2") do |config|
     apt-get install docker.io -y
 
     cd /vagrant
-    bash setup_development.sh
+    bash setup_all.sh
 
     sudo usermod -aG docker vagrant
 
