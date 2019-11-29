@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# <<------- CONFIGURATION START ------->>
+
+# The following API keys should be in the environment; 
+# otherwise, you can also set them here:
+# 
+#     MICROSOFT_TRANSLATE_API_KEY
+#     GOOGLE_TRANSLATE_API_KEY
+#     WORDNIK_API_KEY
+#     ZEEGUU_API_EXTERNAL
+# 
+
+# export MICROSOFT_TRANSLATE_API_KEY=''
+# export GOOGLE_TRANSLATE_API_KEY=''
+# export WORDNIK_API_KEY=''
+
+
+# this next var (ZEEGUU_API_EXTERNAL) is used to customize
+# the build of the Web container such that it knows where
+# it can find the API. 
+
+# On a Linux development machine the default is
+# 
+# export ZEEGUU_API_EXTERNAL='http://api.zeeguu.local'
+# 
+# However, when running from mac with Zeeguu deployed in 
+# VirtualBox the api is by default located at
+# 
+# export ZEEGUU_API_EXTERNAL='http://api.zeeguu.local:8080'
+# 
+# 
+
+
+# Set to YES if running in the cloud
+RUNNING_IN_CLOUD='NO'
+
+# <<------- CONFIGURATION END ------->>
+
+
+# on some Linuxes route and ifconfig are not available
+if ! {  which route >/dev/null &&  which ifconfig >/dev/null  ; } ; then
+    apt-get install -y net-tools
+fi
+
+# on some Linuxes curl is not available
+if ! {  which curl >/dev/null ; } ; then
+    apt-get install -y curl
+fi
+
+# on some Linuxes dig is not available
+if ! {  which dig >/dev/null ; } ; then
+    apt-get install -y dnsutils
+fi
+
+
+
+if [ "$RUNNING_IN_CLOUD" == "NO" ]; then
+    DEFAULT_INTERFACE=$(route | grep -m 1 -oP '^default.*\s+\K.*')
+    export SERVER_IP=$(ifconfig $DEFAULT_INTERFACE | grep "inet " | awk '{print $2}')
+else
+    # Get the public IP if running in the cloud
+    export SERVER_IP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
+fi
