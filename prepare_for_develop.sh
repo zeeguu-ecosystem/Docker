@@ -4,8 +4,8 @@ set -x
 docker start zeeguu-mysql
 
 
-docker stop zeeguu-web
-docker stop zeeguu-api-core
+docker stop zeeguu-web 2> /dev/null || echo "zeeguu-web container does not exist"
+docker stop zeeguu-api-core 2> /dev/null || echo "zeeguu-api-core container does not exist"
 
 docker rm -f zeeguu-web-dev > /dev/null 2>&1
 docker rm -f zeeguu-api-core-dev > /dev/null 2>&1
