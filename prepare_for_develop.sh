@@ -3,6 +3,9 @@ set -x
 ORIG_TEACHER_DASHBOARD_DIR=`grep -i "Alias /teacher-dashboard" ./docker-files/zeeguu-web/apache-zeeguu.conf | awk '{ print $3 }'`
 NEW_TEACHER_DASHBOARD_DIR="/opt/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard/build"
 
+ORIG_WEB_DIR="/var/www/zeeguu-web"
+NEW_WEB_DIR="/opt/Zeeguu-Web"
+
 docker start zeeguu-mysql
 
 
@@ -45,7 +48,8 @@ docker exec zeeguu-web-dev bash -c "cd /opt/Zeeguu-Reader && npm install"
 
 # Replace the directory of the Teacher Dashboard React project in the apache configuration
 docker exec -d zeeguu-web-dev sed -i "s,$ORIG_TEACHER_DASHBOARD_DIR,$NEW_TEACHER_DASHBOARD_DIR,g" /etc/apache2/sites-available/apache-zeeguu.conf
- 
+docker exec -d zeeguu-web-dev sed -i "s,$ORIG_WEB_DIR,$NEW_WEB_DIR,g" /etc/apache2/sites-available/apache-zeeguu.conf
+
 # Reload the apache config
 docker exec zeeguu-api-core-dev service apache2 reload
 
