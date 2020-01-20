@@ -14,8 +14,7 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
     ProxyPreserveHost On
 
     <Proxy *>
-        Order allow,deny
-        Allow from all
+        Require all granted
     </Proxy>
     ProxyPass / http://localhost:8080/
     ProxyPassReverse / http://localhost:8080/
@@ -64,16 +63,14 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
         WSGIProcessGroup zeeguu_web
         WSGIApplicationGroup %{GLOBAL}
         Options +ExecCGI
-        Order deny,allow
-        Allow from all
+        Require all granted
     </Directory>
 
     # Static Stuff
     Alias /static /var/www/zeeguu-web/zeeguu_web/static
 
     <Directory /var/www/zeeguu-web/zeeguu_web/static/>
-        Order allow,deny
-        Allow from all
+    	 Require all granted
     </Directory>
 
 
@@ -81,8 +78,7 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
     Alias /teacher-dashboard /var/www/teacher-dashboard
 
     <Directory /var/www/teacher-dashboard/>
-        Order allow,deny
-        Allow from all
+    	Require all granted
 
         # HTML 5 mode routing
         # from: https://gist.github.com/leocaseiro/4305e06948aa97e77c93

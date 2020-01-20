@@ -8,8 +8,7 @@
     ProxyPreserveHost On
 
     <Proxy *>
-        Order allow,deny
-        Allow from all
+        Require all granted
     </Proxy>
     ProxyPass / http://localhost:8080/
     ProxyPassReverse / http://localhost:8080/
@@ -30,8 +29,7 @@
     Alias /teacher-dashboard /var/www/teacher-dashboard
 
     <Directory /var/www/teacher-dashboard/>
-        Order allow,deny
-        Allow from all
+        Require all granted
 
         # HTML 5 mode routing
         # from: https://gist.github.com/leocaseiro/4305e06948aa97e77c93
@@ -69,22 +67,19 @@
         WSGIProcessGroup zeeguu_web
         WSGIApplicationGroup %{GLOBAL}
         Options +ExecCGI
-        Order deny,allow
-        Allow from all
+        Require all granted
     </Directory>
 
     Alias /teacher-react /var/www/teacher-react
 
     <Directory /var/www/teacher-react/>
-        Order allow,deny
-        Allow from all
+        Require all granted
     </Directory>
 
     Alias /static /var/www/zeeguu-web/zeeguu_web/static
 
     <Directory /var/www/zeeguu-web/zeeguu_web/static/>
-        Order allow,deny
-        Allow from all
+        Require all granted
     </Directory>
     ErrorLog ${APACHE_LOG_DIR}/error.log
     LogLevel info
