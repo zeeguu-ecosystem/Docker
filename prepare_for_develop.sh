@@ -25,7 +25,7 @@ docker run --net=host -d --name=zeeguu-web-dev \
        -v $(pwd)/Zeeguu-Web:/opt/Zeeguu-Web \
        -v $(pwd)/Zeeguu-Exercises/src:/opt/Zeeguu-Exercises/src \
        -v $(pwd)/Zeeguu-Reader/src:/opt/Zeeguu-Reader/src \
-       -v $(pwd)/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard/src:/opt/Zeeguu-Teacher-Dashboard-Reactzeeguu-teacher-dashboard/src \
+       -v $(pwd)/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard/src:/opt/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard/src \
        -v $(pwd)/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard/package.json:/opt/Zeeguu-Teacher-Dashboard-React/zeeguu-teacher-dashboard/package.json \
        zeeguu-web
 
