@@ -47,7 +47,13 @@ RUN python -m nltk.downloader -d /var/www/nltk_data averaged_perceptron_tagger
 ## ===========================================
 ## comment the lines in this section if you do not want the FMD deployed
 
-RUN pip install flask_monitoringdashboard
+#.1 Alternative one: from PyPI
+#RUN pip install flask_monitoringdashboard
+
+#.2 Alternative two: install from sources
+COPY Flask-MonitoringDashboard /opt/Flask-MonitoringDashboard
+WORKDIR /opt/Flask-MonitoringDashboard
+RUN python setup.py install 
 
 ## NOTE(mircealungu) previous pip install is here because fmd still can't be added to the 
 ##     requiremens... a bug prevents the API tests from running when the FMD is deployed

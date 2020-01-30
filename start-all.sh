@@ -1,8 +1,5 @@
 #!/bin/bash
-export MICROSOFT_TRANSLATE_API_KEY=''
-export GOOGLE_TRANSLATE_API_KEY=''
-export WORDNIK_API_KEY=''
-export MULTI_LANG_TRANSLATOR_AB_TESTING=42
+. set_api_keys.sh
 
 docker rm -f zeeguu-mysql && docker run --restart=always --net=host -v /home/mlun/zeeguu-data/mysql:/var/lib/mysql -d --name=zeeguu-mysql zeeguu-mysql
 docker rm -f fmd-mysql && docker run -v /home/mlun/zeeguu-data/fmd-mysql:/var/lib/mysql -p 3307:3306 -d --name=fmd-mysql fmd-mysql
