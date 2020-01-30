@@ -16,5 +16,4 @@ docker-files/zeeguu-web/apache-zeeguu.conf
 
 zeeguu-data*
 
-start-all.sh
 set_api_keys.sh
