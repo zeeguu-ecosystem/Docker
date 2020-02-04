@@ -3,6 +3,7 @@
 
 # before runiing vagrant up you need to install one plugin
 # for disk size reconfiguration
+# 
 #     vagrant plugin install vagrant-disksize
 
 
