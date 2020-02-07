@@ -22,6 +22,11 @@ RUN apt-get install -y \
     nodejs \
     npm 
 
+# Upgrade npm
+RUN npm i npm@latest -g
+# running it twice to ensure that the warning of before does not appear anymore
+RUN npm i npm@latest -g
+
 # Install an up to date wsgi
 RUN pip install mod_wsgi
 RUN /bin/bash -c 'mod_wsgi-express install-module | tee /etc/apache2/mods-available/wsgi.{load,conf}'
@@ -52,7 +57,8 @@ RUN sed -i "s,$DEFAULT_ZEEGUU_API,$ZEEGUU_API__EXTERNAL,g" src/zeeguu_exercises/
 RUN sed -i "s,$DEFAULT_ZEEGUU_API,$ZEEGUU_API__INTERNAL,g" src/zeeguu_exercises/endpoints.py
 # Front-end
 RUN npm install
-RUN ./node_modules/.bin/webpack
+# commented out because it's redundat with the next command!
+#RUN ./node_modules/.bin/webpack
 RUN npm run build
 # Back-end
 RUN pip install -r requirements.txt
