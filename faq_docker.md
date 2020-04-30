@@ -36,6 +36,7 @@ docker build -t zeeguu-web --build-arg ZEEGUU_API__EXTERNAL="https://api.zeeguu.
 
 ### Other
 
+
 # Check the container log
 
 docker logs xxx
