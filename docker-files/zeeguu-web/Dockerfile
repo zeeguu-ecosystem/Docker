@@ -62,8 +62,9 @@ RUN npm install
 RUN npm run build
 # Back-end
 RUN pip install -r requirements.txt
-WORKDIR /opt/Zeeguu-Exercises/src
-RUN python setup.py install
+WORKDIR /opt/Zeeguu-Exercises/python
+RUN pip install --upgrade --force-reinstall setuptools
+RUN python setup.py develop
 
 # Install Zeeguu Reader
 COPY --chown=www-data:www-data Zeeguu-Reader /opt/Zeeguu-Reader
