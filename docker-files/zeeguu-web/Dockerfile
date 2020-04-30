@@ -40,7 +40,7 @@ RUN a2enmod ssl
 # Install Zeeguu-Web
 COPY --chown=www-data:www-data Zeeguu-Web /opt/Zeeguu-Web
 WORKDIR /opt/Zeeguu-Web
-RUN pip install -r requirements.txt
+RUN pip install -r requirements-dev.txt
 RUN python setup.py install
 
 # Install Teacher-Dashboard
@@ -53,8 +53,8 @@ RUN python setup.py install
 COPY --chown=www-data:www-data Zeeguu-Exercises /opt/Zeeguu-Exercises
 WORKDIR /opt/Zeeguu-Exercises
 # Update Zeeguu API url
-RUN sed -i "s,$DEFAULT_ZEEGUU_API,$ZEEGUU_API__EXTERNAL,g" src/zeeguu_exercises/static/js/app/settings.js
-RUN sed -i "s,$DEFAULT_ZEEGUU_API,$ZEEGUU_API__INTERNAL,g" src/zeeguu_exercises/endpoints.py
+RUN sed -i "s,$DEFAULT_ZEEGUU_API,$ZEEGUU_API__EXTERNAL,g" javascript/app/settings.js
+RUN sed -i "s,$DEFAULT_ZEEGUU_API,$ZEEGUU_API__INTERNAL,g" python/zeeguu_exercises/endpoints.py
 # Front-end
 RUN npm install
 # commented out because it's redundat with the next command!
