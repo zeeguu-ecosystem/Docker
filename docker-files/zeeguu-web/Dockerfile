@@ -20,7 +20,9 @@ RUN apt-get install -y \
     apache2-dev \
     vim \
     nodejs \
-    npm 
+    npm \
+    certbot python-certbot-apache
+
 
 # Upgrade npm
 RUN npm i npm@latest -g
@@ -33,6 +35,10 @@ RUN /bin/bash -c 'mod_wsgi-express install-module | tee /etc/apache2/mods-availa
 RUN a2enmod wsgi
 RUN a2enmod headers
 RUN a2enmod ssl 
+
+# prepare the conf- for letsencrypt
+COPY --chown=www-data:www-data docker-files/zeeguu-web/le.conf /etc/apache2/conf-available/le.conf
+run a2enconf le
 
 # All folders exposed via apache need to be owned by www-data since
 # that is the user apache will run under.

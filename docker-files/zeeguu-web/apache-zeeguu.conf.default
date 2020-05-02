@@ -11,10 +11,20 @@
         Order allow,deny
         Allow from all
     </Proxy>
+
+    ProxyPass /.well-known !
+
     ProxyPass / http://localhost:8080/
     ProxyPassReverse / http://localhost:8080/
 </VirtualHost>
 
+
+
+<VirtualHost *:80>
+    ServerName zeeguu.local
+
+    Redirect permanent / http://www.zeeguu.local/
+</VirtualHost>
 
 
 <VirtualHost *:80>
