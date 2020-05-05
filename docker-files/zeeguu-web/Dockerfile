@@ -37,6 +37,7 @@ RUN a2enmod headers
 RUN a2enmod ssl 
 
 # prepare the conf- for letsencrypt
+RUN mkdir -p /var/www/html/.well-known/acme-challenge
 COPY --chown=www-data:www-data docker-files/zeeguu-web/le.conf /etc/apache2/conf-available/le.conf
 run a2enconf le
 
@@ -135,6 +136,8 @@ RUN sed -i "s,http://127.0.0.1:9001,$ZEEGUU_API__INTERNAL/,g" /opt/zeeguu/config
 RUN a2dissite 000-default.conf
 RUN a2ensite apache-zeeguu.conf
 
+# Copy also the zeeguu-conf-ssl
+COPY ./docker-files/zeeguu-web/apache-zeeguu-ssl.conf /etc/apache2/sites-available/apache-zeeguu-ssl.conf
 
 RUN a2enmod rewrite
 RUN a2enmod proxy
