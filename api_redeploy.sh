@@ -1,12 +1,15 @@
-#! /bin/bash
-
-# this works if both the Zeeguu-Core and the Zeeguu-API
-# have been deployed with setup.py develop.
-# corresponding lines int he docker-files/
-
-# if it fails to run the docker command, it assumes that
-# it might be called from the host machine, and thus 
-# 
-((echo "Trying to run with docker..." && docker exec zeeguu-api-core-dev service apache2 reload) \
-	|| (echo "Trying to run with vagrant..." && vagrant ssh -- -t 'docker exec zeeguu-api-core-dev service apache2 reload')) && echo "Success."
+docker build --build-arg API_VERSION=`cat .git/modules/Zeeguu-API/HEAD` \
+	-t zeeguu-api-core \
+	-f docker-files/zeeguu-api-core/Dockerfile . \
+	&& \
+	docker rm -f zeeguu-api-core \
+	&& \
+	docker run --net=host \
+	-v /home/mlun/zeeguu-data:/opt/zeeguu-data \
+	-d \
+	-e MICROSOFT_TRANSLATE_API_KEY=$MICROSOFT_TRANSLATE_API_KEY \
+	-e GOOGLE_TRANSLATE_API_KEY=$GOOGLE_TRANSLATE_API_KEY \
+	-e WORDNIK_API_KEY=$WORDNIK_API_KEY \
+	-e MULTI_LANG_TRANSLATOR_AB_TESTING=$MULTI_LANG_TRANSLATOR_AB_TESTING  \
+	--name=zeeguu-api-core zeeguu-api-core
 
