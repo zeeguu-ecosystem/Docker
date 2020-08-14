@@ -1,3 +1,3 @@
 #! /bin/bash
 
-docker exec -it zeeguu-api-core-dev vi /var/log/apache2/error.log
+docker exec zeeguu-api-core tail -f /var/log/apache2/error.log
