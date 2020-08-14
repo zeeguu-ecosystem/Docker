@@ -36,7 +36,7 @@ RUN a2enmod ssl
 
 # prepare the conf- for letsencrypt
 RUN mkdir -p /var/www/html/.well-known/acme-challenge
-COPY --chown=www-data:www-data docker-files/zeeguu-web/le.conf /etc/apache2/conf-available/le.conf
+COPY --chown=www-data:www-data docker-files/zeeguu-web-2.0/le.conf /etc/apache2/conf-available/le.conf
 run a2enconf le
 
 # All folders exposed via apache need to be owned by www-data since
@@ -108,7 +108,7 @@ RUN a2dissite 000-default.conf
 #RUN a2ensite apache-zeeguu.conf
 
 # Copy also the zeeguu-conf-ssl
-COPY ./docker-files/zeeguu-web/apache-zeeguu-ssl.conf /etc/apache2/sites-available/apache-zeeguu-ssl.conf
+COPY ./docker-files/zeeguu-web-2.0/apache-zeeguu-ssl.conf /etc/apache2/sites-available/apache-zeeguu-ssl.conf
 RUN a2ensite apache-zeeguu-ssl.conf
 
 RUN a2enmod rewrite
