@@ -33,6 +33,10 @@ docker build --build-arg API_VERSION=`cat .git/modules/Zeeguu-API/HEAD` -t zeegu
 #rebuild and redeploy Web
 docker build -t zeeguu-web --build-arg ZEEGUU_API__EXTERNAL="https://api.zeeguu.org" -f docker-files/zeeguu-web/Dockerfile . && docker rm -f zeeguu-web && docker run --net=host -v /etc/letsencrypt:/etc/letsencrypt -v /home/mlun/zeeguu-data:/opt/zeeguu-data -d --name=zeeguu-web zeeguu-web
 
+# rebuild and redeploy Web 2.0
+docker build -t zeeguu-web --build-arg ZEEGUU_API="https://api.zeeguu.org" -f docker-files/zeeguu-web-2.0/Dockerfile . && docker rm -f zeeguu-web && docker run --net=host -v /etc/letsencrypt:/etc/letsencrypt -v /home/mlun/zeeguu-data:/opt/zeeguu-data -d --name=zeeguu-web zeeguu-web
+
+
 
 ### Other
 
