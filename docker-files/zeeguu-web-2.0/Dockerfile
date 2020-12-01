@@ -99,7 +99,7 @@ ENV ZEEGUU_WEB_CONFIG=/opt/zeeguu/config/web.cfg
 #ENV ZEEGUU_API=$ZEEGUU_API
 
 # Enable Zeeguu-Web website
-COPY ./docker-files/zeeguu-web/apache-zeeguu.conf /etc/apache2/sites-available/apache-zeeguu.conf
+COPY ./docker-files/zeeguu-web-2.0/apache-zeeguu.conf /etc/apache2/sites-available/apache-zeeguu.conf
 
 RUN sed -i "s,http://127.0.0.1:8080,$ZEEGUU_API__INTERNAL,g" /etc/apache2/sites-available/apache-zeeguu.conf
 
