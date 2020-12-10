@@ -17,6 +17,10 @@ RUN /bin/bash -c 'mod_wsgi-express install-module | tee /etc/apache2/mods-availa
 RUN a2enmod wsgi
 RUN a2enmod headers
 
+COPY --chown=www-data:www-data Python-Wordstats /opt/Python-Wordstats
+WORKDIR /opt/Python-Wordstats
+RUN python setup.py develop
+
 # Install Zeeguu-Core
 COPY --chown=www-data:www-data Zeeguu-Core /opt/Zeeguu-Core
 WORKDIR /opt/Zeeguu-Core
@@ -25,6 +29,12 @@ RUN pip install -r requirements.txt
 #for i don't know what reason, if we 'install' it here, we can't uninstall it later!
 # thus we 'develop'
 RUN python setup.py develop
+
+
+#ML: This is needed because the translators installer installs nltk in ~ (which in the
+# case of docker is /root. however, when run, it runs as www-data with ~ being /var/www 
+RUN python -m nltk.downloader -d /var/www/nltk_data punkt
+RUN python -m nltk.downloader -d /var/www/nltk_data averaged_perceptron_tagger
 
 
 # Install Zeeguu-API
@@ -36,12 +46,6 @@ COPY --chown=www-data:www-data Zeeguu-API /opt/Zeeguu-API
 WORKDIR /opt/Zeeguu-API
 RUN pip install -r requirements.txt
 RUN python setup.py install
-
-#ML: This is needed because the translators installer installs nltk in ~ (which in the
-# case of docker is /root. however, when run, it runs as www-data with ~ being /var/www 
-RUN python -m nltk.downloader -d /var/www/nltk_data punkt
-RUN python -m nltk.downloader -d /var/www/nltk_data averaged_perceptron_tagger
-
 
 ## Installing Flask Monitoring Dashboard (FMD)
 ## ===========================================
