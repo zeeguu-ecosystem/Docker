@@ -25,3 +25,6 @@
 [submodule "Flask-MonitoringDashboard"]
 	path = Flask-MonitoringDashboard
 	url = https://github.com/flask-dashboard/Flask-MonitoringDashboard.git
+[submodule "Python-Wordstats"]
+	path = Python-Wordstats
+	url = https://github.com/zeeguu-ecosystem/Python-Wordstats.git
