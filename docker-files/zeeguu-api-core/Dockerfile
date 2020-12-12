@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.8
 
 # To not deploy the Flask Monitoring Dashboard comment the following two lines (and the corresponding section below)
 ARG API_VERSION
